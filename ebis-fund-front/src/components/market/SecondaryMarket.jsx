@@ -5,7 +5,7 @@ import SecondaryMarketABI from '../../contracts/SecondaryMarketABI.json';
 import DigitalEuroABI from '../../contracts/DigitalEuroABI.json';
 
 // Address provided by user
-const SECONDARY_MARKET_ADDRESS = "0xb677eefc8c60919ff4726dda3fa827b70fd64f89";
+const SECONDARY_MARKET_ADDRESS = import.meta.env.VITE_SECONDARY_MARKET_ADDRESS;
 const DIGITAL_EURO_ADDRESS = import.meta.env.VITE_DIGITAL_EURO_ADDRESS;
 
 // Base URI from contract deployment
