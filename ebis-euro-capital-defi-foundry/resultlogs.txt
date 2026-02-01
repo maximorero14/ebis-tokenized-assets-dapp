@@ -1,0 +1,495 @@
+rl sepolia --account main_sepolia --broadcast
+[⠊] Compiling...
+No files changed, compilation skipped
+Script ran successfully.
+
+== Logs ==
+  
+======================================================================
+  FULL SYSTEM DEMO - HAPPY PATH
+  ======================================================================
+  Complete workflow: Fund Creation -> IPO -> P2P Trading
+
+  ==> Participants:
+     Fund Manager: 0xe30F5D336931186dD86b5C9426FD4493C34a5C5D
+     Investor 1:   0x6Fc2Fbb2973E592EB6f932a10b3e72eeaA3113C0
+     Investor 2:   0xdE4a466B7441357E1137A1a1E311bD70c1439eCB
+     Investor 3:   0xac75578bBdd3C830B32F2De2B8E2a4fA36996082
+  
+======================================================================
+  PHASE 1: SYSTEM DEPLOYMENT
+  ======================================================================
+
+  ==> Digital Euro (DEUR) deployed
+     Address: 0x11bbca967C1A7C9b858fd712A28a75Da084Eb780
+  
+==> Financial Assets (ERC-1155) deployed
+     Address: 0x025CAe8cc0ddD433e144dA9f5c86527eDCfD75FD
+  
+==> Primary Market (IPO) deployed
+     Address: 0xCbf48a8AA84A786384991E4b89192E5CBEE550Ab
+  
+==> Secondary Market (P2P) deployed
+     Address: 0x540E5d1BD83817BD75115b5C73d371a04B5da530
+  
+==> Configuring Primary Market in Financial Assets...
+     Primary Market configured successfully
+  
+======================================================================
+  PHASE 2: FUND CREATION & SHARE ISSUANCE
+  ======================================================================
+
+  ==> Fund Manager creating investment funds...
+     Created: Nexus Technology Fund (ID: 0)
+     Created: Goldstone Precious Metals Fund (ID: 1)
+     Created: Apex Real Estate Capital Fund (ID: 2)
+     Created: Green Future Sustainable Energy Fund (ID: 3)
+     Created: MediCare Healthcare & Biotech Fund (ID: 4)
+  
+==> Fund Manager issuing shares to Primary Market...
+     Issued 1,000 TECH shares
+     Issued 500 GOLD shares
+     Issued 750 REAL shares
+     Issued 800 GREEN shares
+     Issued 600 HEALTH shares
+  
+==> Fund Manager setting IPO prices...
+     TECH: 100 DEUR per share
+     GOLD: 200 DEUR per share
+     REAL: 150 DEUR per share
+     GREEN: 80 DEUR per share
+     HEALTH: 250 DEUR per share
+  
+======================================================================
+  PHASE 3: CENTRAL BANK - DEUR DISTRIBUTION
+  ======================================================================
+
+  ==> Central Bank minting Digital Euro to investors...
+     Investor 1: 50,000 DEUR
+     Investor 2: 30,000 DEUR
+     Investor 3: 40,000 DEUR
+     DEUR distributed - Investors ready to trade
+  
+======================================================================
+  PHASE 4: PRIMARY MARKET - IPO PURCHASES
+  ======================================================================
+
+  ==> Investor 1: Purchasing from IPO (Tech-focused strategy)...
+     Bought 100 TECH shares for 10,000 DEUR
+     Bought 50 GOLD shares for 10,000 DEUR
+     Total spent: 20,000 DEUR
+  
+==> Investor 2: Purchasing from IPO (ESG-focused strategy)...
+     Bought 100 GREEN shares for 8,000 DEUR
+     Bought 80 REAL shares for 12,000 DEUR
+     Total spent: 20,000 DEUR
+  
+==> Investor 3: Purchasing from IPO (Balanced strategy)...
+     Bought 60 HEALTH shares for 15,000 DEUR
+     Bought 30 GOLD shares for 6,000 DEUR
+     Bought 50 TECH shares for 5,000 DEUR
+     Total spent: 26,000 DEUR
+  
+==> IPO Results:
+     Fund Treasury raised (DEUR): 66000
+     TECH remaining: 850
+     GOLD remaining: 420
+     REAL remaining: 670
+     GREEN remaining: 700
+     HEALTH remaining: 540
+  
+======================================================================
+  PHASE 5: SECONDARY MARKET - CREATING LISTINGS
+  ======================================================================
+
+  ==> Scenario: Investors creating listings for various funds
+     Approvals granted to Secondary Market
+  
+==> Investor 1: Listing TECH shares at premium...
+     Listing 0: 60 TECH @ 120 DEUR/share (20% premium over IPO)
+     60 TECH shares locked in escrow
+  
+==> Investor 2: Listing GREEN shares...
+     Listing 1: 50 GREEN @ 85 DEUR/share (6% premium over IPO)
+     50 GREEN shares locked in escrow
+  
+======================================================================
+  PHASE 6: SECONDARY MARKET - P2P TRADING (DvP)
+  ======================================================================
+
+  ==> Trade 1: Investor 2 buys TECH from Investor 1's listing
+  
+==> Investor 2: Purchasing TECH from Secondary Market...
+     Bought 40 TECH from Investor 1 for 4,800 DEUR (40 x 120)
+     Atomic DvP: DEUR payment + Asset delivery in 1 transaction
+  
+   Investor 2 now has (TECH): 40
+     Investor 1 received: 4,800 DEUR
+  
+==> Trade 2: Investor 3 buys GREEN from Investor 2's listing
+  
+==> Investor 3: Purchasing GREEN from Secondary Market...
+     Bought 30 GREEN from Investor 2 for 2,550 DEUR (30 x 85)
+     Atomic DvP: DEUR payment + Asset delivery in 1 transaction
+  
+   Investor 3 now has (GREEN): 30
+     Investor 2 received: 2,550 DEUR
+  
+======================================================================
+  FINAL PORTFOLIO SUMMARY
+  ======================================================================
+
+  ==> Investor 1 (Tech + Precious Metals):
+     TECH shares: 40
+     GOLD shares: 50
+     DEUR balance: 34800
+     Strategy: IPO investor who sold TECH at premium (120 vs 100 IPO)
+     P2P Profit (DEUR): 800
+  
+==> Investor 2 (ESG-focused + TECH):
+     TECH shares: 40
+     GREEN shares: 50
+     REAL shares: 80
+     DEUR balance: 7750
+     Strategy: ESG focus with opportunistic TECH purchase on secondary
+  
+==> Investor 3 (Balanced Diversification):
+     TECH shares: 50
+     GOLD shares: 30
+     GREEN shares: 30
+     HEALTH shares: 60
+     DEUR balance: 11450
+     Strategy: Well-diversified portfolio across 4 different fund types
+  
+==> Fund Treasury:
+     Total raised from IPO (DEUR): 66000
+     Deployment: Available for fund management and investments
+  
+==> Market Statistics:
+     IPO Performance:
+     - TECH sold: 150
+     - GOLD sold: 80
+     - REAL sold: 80
+     - GREEN sold: 100
+     - HEALTH sold: 60
+     Secondary Market Volume (DEUR): 7350
+  
+======================================================================
+  KEY FEATURES DEMONSTRATED
+  ======================================================================
+
+  ==> Complete System Integration:
+     - All 4 contracts working together seamlessly
+     - 5 diverse fund types created and traded
+     - Realistic user journey from IPO to P2P trading
+     - Multiple investment strategies demonstrated
+  
+==> DvP (Delivery vs Payment) Settlement:
+     - Primary Market: Atomic DEUR <-> Asset swap
+     - Secondary Market: Atomic P2P settlement
+     - Multiple listings and trades executed
+     - Zero counterparty risk
+  
+==> Market Functionality:
+     - Primary Market (IPO) for initial distribution
+     - Secondary Market (P2P) for price discovery and liquidity
+     - Partial fills enabling liquidity
+     - Asset escrow protecting both parties
+  
+==> Tokenization Benefits:
+     - 24/7 trading capability
+     - Fractional ownership (can buy 1 share)
+     - Instant settlement (no T+2 delays)
+     - Transparent on-chain history
+     - Programmable compliance (via roles)
+  
+======================================================================
+  DEPLOYED CONTRACT ADDRESSES
+  ======================================================================
+
+  ==> Core Contracts:
+     DigitalEuro (DEUR):      0x11bbca967C1A7C9b858fd712A28a75Da084Eb780
+     FinancialAssets (ERC1155): 0x025CAe8cc0ddD433e144dA9f5c86527eDCfD75FD
+     PrimaryMarket (IPO):     0xCbf48a8AA84A786384991E4b89192E5CBEE550Ab
+     SecondaryMarket (P2P):   0x540E5d1BD83817BD75115b5C73d371a04B5da530
+  ======================================================================
+  
+==> Full System Demo Completed Successfully!
+
+
+## Setting up 1 EVM.
+
+==========================
+
+Chain 11155111
+
+Estimated gas price: 2.012916733 gwei
+
+Estimated total gas used for script: 10508566
+
+Estimated amount required: 0.021152868341234878 ETH
+
+==========================
+Enter keystore password:
+
+##### sepolia
+✅  [Success] Hash: 0xafe536b29fd484da5ebdd17fa7cc5d2eb00b3401b657ddc38482a1fa7903ed4e
+Contract Address: 0x11bbca967C1A7C9b858fd712A28a75Da084Eb780
+Block: 10169735
+Paid: 0.00090828868851968 ETH (797264 gas * 1.13925712 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x416058185eb541c5819efb1479e03688198f2fd74eb6091c232b32d2457301d7
+Contract Address: 0x025CAe8cc0ddD433e144dA9f5c86527eDCfD75FD
+Block: 10169736
+Paid: 0.001960548211557068 ETH (1885604 gas * 1.039745467 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0xe24112c375a94f042ec190709973224b71e412d6014bd73c06e1011eaa3e7938
+Contract Address: 0xCbf48a8AA84A786384991E4b89192E5CBEE550Ab
+Block: 10169738
+Paid: 0.001026919769634462 ETH (964798 gas * 1.064388369 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0xe8e33d1f3f97e2efed26a5d8724516c94c5f4d99103b50fff2daf1ffa8f878c1
+Contract Address: 0x540E5d1BD83817BD75115b5C73d371a04B5da530
+Block: 10169739
+Paid: 0.001418056270985525 ETH (1214275 gas * 1.167821351 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x5c057a8195e0be928b3b6443ce3f21ef7da5faa49fd5860c9d6ffd8ca544219c
+Block: 10169740
+Paid: 0.000057076735511661 ETH (47921 gas * 1.191058941 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x6e1b5004749f0ad3ba036f4174cbc923334d37c90e7016c7b674ae57a0db0ec9
+Block: 10169741
+Paid: 0.000104915944597825 ETH (96695 gas * 1.085019335 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x1b130643e8be84c57141038b0084a572f79800c4a7b06b8f42c72fa760b54850
+Block: 10169742
+Paid: 0.000079101455566625 ETH (79715 gas * 0.992303275 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x24d753d48dc12a8c81899aaf8be5c10879d087d183d6151534ba4be1e1d4ef30
+Block: 10169743
+Paid: 0.000088677917977857 ETH (79703 gas * 1.112604519 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x3cc0b7f09e24c618259a2984c73b35b26285dd70a258db85318c1e7a1112d369
+Block: 10169744
+Paid: 0.00012471237907167 ETH (124577 gas * 1.00108671 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x44a55349b10deef6c1f69ff17684a1e2d434db841329b62d907005b1b296426f
+Block: 10169745
+Paid: 0.00013982868114481 ETH (124565 gas * 1.122535874 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0xdc9875f7dfd3a38ac74a30dfa3b3bfd86fe281110b657dcc073752ebd72cc237
+Block: 10169746
+Paid: 0.000108891344848175 ETH (105775 gas * 1.029462017 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x054cacb3e37a2e7f6771e297e87648ea66689a0968e13bc214540c26de27225f
+Block: 10169748
+Paid: 0.000091737115765605 ETH (88687 gas * 1.034391915 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x0ad651d46b04ae940644faea9118f413e383b2a655420792dac98ff12cffd931
+Block: 10169749
+Paid: 0.000083402639913566 ETH (88687 gas * 0.940415618 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x8a0588a164bde3c9fab0a1f2bebbc0a607db4cb29eb0d0f55c820c53802c6487
+Block: 10169750
+Paid: 0.000093598676436902 ETH (88673 gas * 1.055548774 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x175a7351cd914bbba46f7f6ad6be801dc6d00600dc0d4d1d70461e847bad1d5f
+Block: 10169751
+Paid: 0.000085318037625613 ETH (88673 gas * 0.962164781 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0xe789143635f005d26e3a61398c8bf211f22f1a6c5f65a0c64d4b07c9cf88c3da
+Block: 10169752
+Paid: 0.000051530481486468 ETH (47732 gas * 1.079579349 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x320d18b6542d34eef7524f68d5b5f451bc7f24a0a9671155c4d6ebf6d05e9a01
+Block: 10169753
+Paid: 0.000047158190764288 ETH (47744 gas * 0.987730202 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x4dbc6082572d95526dc05b82e907fa2c1e2cf4f42f6daa99e8448decaec7bce0
+Block: 10169754
+Paid: 0.000052945031715008 ETH (47756 gas * 1.108657168 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x3ae6346dc016b52b23b115e266a9a414d25e9188a895f1d0326671532c6626f6
+Block: 10169755
+Paid: 0.00004767083804928 ETH (47744 gas * 0.99846762 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x257b3f18a42c12c6d007ec43cd086e22fd396de46a89d2495d07e431bcf29ab7
+Block: 10169756
+Paid: 0.0000535271776893 ETH (47756 gas * 1.120847175 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x6d7cb2ba48be2a2223481e6ea19bf665a4a24ced8cb9badd60f611ce1e359963
+Block: 10169757
+Paid: 0.000073865410287102 ETH (72282 gas * 1.021906011 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x3c7f92fef7f105d58fd5aabcea629e8fd2c04342d3584d28337e32662616f8e2
+Block: 10169759
+Paid: 0.00005684217944055 ETH (55182 gas * 1.030085525 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x94a655e26cea89489e4019a0f900b9f89a6a1393abe8217cc59d8ff060626dd1
+Block: 10169760
+Paid: 0.00005114857765944 ETH (55182 gas * 0.92690692 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x42e7011e8a7f0d47ee410a8bfc1ce5b36e1e9afd3d4836a75c4616cf6afa1659
+Block: 10169761
+Paid: 0.000048243627062312 ETH (46372 gas * 1.040361146 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x43455c2b4732583604dcdd29f443d5914ea6b0d6c9fe02f8a9719e3f4e89a9d5
+Block: 10169762
+Paid: 0.000098438366898114 ETH (104658 gas * 0.940571833 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x6ce9d7d51f95cc11c9d3c33c45b5d995e3c48d3816e18cdade5e605f7ea3c456
+Block: 10169763
+Paid: 0.00009244639797498 ETH (87570 gas * 1.055685714 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x567241feeb9fddd7f7dec562b0ad48761bd6c2a73ff0d220ea6a4c5c57707215
+Block: 10169765
+Paid: 0.000051600705419148 ETH (46372 gas * 1.112755659 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x99763f0c695298f2d330f04cba443b7b678f53ca2d89e365f2798415ee18e069
+Block: 10169766
+Paid: 0.00008858473322517 ETH (87570 gas * 1.011587681 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x5c5a709058c90beb7bc828febb2e6ae9fab27cdd474d192fb42d98484d496d92
+Block: 10169767
+Paid: 0.00009935525492991 ETH (87570 gas * 1.134580963 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x4f3ec9dae24f822a4de564b4563fd8d552f5ef483d4800d18f38d8618cf3f4a9
+Block: 10169768
+Paid: 0.000049124993095156 ETH (46372 gas * 1.059367573 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x919727e30ea0d593536b6691e04c2eadef2aadb8d0496864a72d73a0c2b87db7
+Block: 10169769
+Paid: 0.00008366998808448 ETH (87570 gas * 0.955464064 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x54ad9fa0508e290b1fc5d94a3127db0873f723aa51059e19b85d2ad2eff99de3
+Block: 10169770
+Paid: 0.00009390615300801 ETH (87570 gas * 1.072355293 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x08874c48f6847d99e45291338d56183ecdc8542fff0e5f3147dbddee0f93ebe5
+Block: 10169771
+Paid: 0.000085026514173084 ETH (87558 gas * 0.971087898 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x23fe5888d81663c5ace75e7dac602662d0d949c44db979ec3177203452de5330
+Block: 10169772
+Paid: 0.00005021543784536 ETH (46184 gas * 1.08729079 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x3834254c32e4435b37be2388cd217f716f987fccf11a507254b8bd8fceeb90ea
+Block: 10169773
+Paid: 0.000045408502333864 ETH (46184 gas * 0.983208521 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x79a95acc01b9aa3f7a1bbe2e258db808595517ea22401b32afc9ebc955f00796
+Block: 10169774
+Paid: 0.000200321291610994 ETH (181879 gas * 1.101398686 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x61eecac03c9e7418c474dbfa57ee067b01b1ae944d87c8e43689cc412bcfa506
+Block: 10169775
+Paid: 0.000184454606972728 ETH (184703 gas * 0.998655176 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x4174c31b4291383d10ed97b29b3655fc2ff7b76314b1f7971fdb5047d8ed1d8a
+Block: 10169776
+Paid: 0.000051762497048916 ETH (46372 gas * 1.116244653 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x6edec7f9869c0c32d2a45db7199cc3e435ec68abf9a11217c03fa0761df72948
+Block: 10169777
+Paid: 0.000104657862490041 ETH (104293 gas * 1.003498437 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x020fc6dc34c9331e07e3c847ff0a2f6ac343e103f00698650de26b10ed377f74
+Block: 10169778
+Paid: 0.000051963941607744 ETH (46372 gas * 1.120588752 gwei)
+
+
+##### sepolia
+✅  [Success] Hash: 0x30beadd0b521c1121792d53af0ad77258b6eb5bac7b072e60df466dd1aba9106
+Block: 10169779
+Paid: 0.00010787941886616 ETH (104305 gas * 1.034268912 gwei)
+
+✅ Sequence #1 on sepolia | Total Paid: 0.008392822048894651 ETH (7826464 gas * avg 1.049047702 gwei)
+                                                              
+
+==========================
+
+ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
+
+Transactions saved to: /Users/maximilianomorero/Documents/maxmorero/MasterCrypto/tema5/ebis-tokenized-assets-dapp/ebis-euro-capital-defi-foundry/broadcast/FullSystemDemo.s.sol/11155111/run-latest.json
+
+Sensitive values saved to: /Users/maximilianomorero/Documents/maxmorero/MasterCrypto/tema5/ebis-tokenized-assets-dapp/ebis-euro-capital-defi-foundry/cache/FullSystemDemo.s.sol/11155111/run-latest.json
+
+maximilianomorero@MacPro-Max-Personal-2026 ebis-euro-capital-defi-foundry % 
