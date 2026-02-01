@@ -15,7 +15,7 @@ function App() {
 
       {/* Video Background */}
       <video autoPlay muted loop playsInline id="bg-video">
-        <source src="/video1.mp4" type="video/mp4" />
+        <source src="/video2.mp4" type="video/mp4" />
       </video>
 
       <Navbar />

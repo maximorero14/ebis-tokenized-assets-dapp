@@ -167,7 +167,7 @@ body::before {
 /* Secondary Navigation */
 .secondary-nav {
     position: fixed;
-    top: 110px;
+    top: 100px;
     left: 0;
     right: 0;
     z-index: 900;
@@ -1364,14 +1364,21 @@ body::before {
 
 /* Responsive */
 @media (max-width: 768px) {
+    body {
+        padding-top: 280px;
+    }
+
     .navbar {
         padding: 1rem 1.5rem;
         flex-direction: column;
         gap: 1rem;
+        z-index: 100000;
+        background: rgba(15, 16, 40, 0.95);
     }
 
     .secondary-nav {
-        top: 170px;
+        top: 210px;
+        z-index: 99998;
     }
 
     .nav-container {
