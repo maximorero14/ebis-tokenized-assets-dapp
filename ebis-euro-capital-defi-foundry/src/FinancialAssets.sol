@@ -47,9 +47,9 @@ contract FinancialAssets is ERC1155, AccessControl, ERC1155Supply {
     error FinancialAssetsInvalidAmount();
     error FinancialAssetsInvalidAssetId();
     error FinancialAssetsAssetAlreadyExists();
-    error FinancialAssetsInvalidAddress();
     error FinancialAssetsInvalidPrimaryMarket();
     error FinancialAssetsPrimaryMarketNotSet();
+    error FinancialAssetsInvalidName();
 
     /**
      * @dev Constructor that initializes the contract
@@ -73,6 +73,11 @@ contract FinancialAssets is ERC1155, AccessControl, ERC1155Supply {
         string memory name,
         string memory symbol
     ) external onlyRole(FUND_MANAGER_ROLE) {
+        // Verify that the name is not empty
+        if (bytes(name).length == 0) {
+            revert FinancialAssetsInvalidName();
+        }
+
         // Verify that the ID is not already in use
         if (bytes(_assetNames[assetId]).length != 0) {
             revert FinancialAssetsAssetAlreadyExists();
@@ -144,7 +149,12 @@ contract FinancialAssets is ERC1155, AccessControl, ERC1155Supply {
             revert FinancialAssetsPrimaryMarketNotSet();
         }
 
-        // Verify that all assets exist
+        // Verify arrays have the same length
+        if (assetIds.length != amounts.length) {
+            revert FinancialAssetsInvalidAmount();
+        }
+
+        // Verify that all assets exist and amounts are valid
         for (uint256 i = 0; i < assetIds.length; i++) {
             if (bytes(_assetNames[assetIds[i]]).length == 0) {
                 revert FinancialAssetsInvalidAssetId();
@@ -155,28 +165,12 @@ contract FinancialAssets is ERC1155, AccessControl, ERC1155Supply {
         }
 
         _mintBatch(primaryMarket, assetIds, amounts, "");
-    }
 
-    /**
-     * @dev Burns tokens of a specific asset
-     * Can only be called by accounts with FUND_MANAGER_ROLE
-     * @param from Address from which tokens will be burned
-     * @param assetId ID of the asset type
-     * @param amount Amount of tokens to burn
-     */
-    /** function burn(
-        address from,
-        uint256 assetId,
-        uint256 amount
-    ) external onlyRole(FUND_MANAGER_ROLE) {
-        if (amount == 0) {
-            revert FinancialAssetsInvalidAmount();
+        // Emit event for each minted asset
+        for (uint256 i = 0; i < assetIds.length; i++) {
+            emit AssetsMinted(assetIds[i], primaryMarket, amounts[i]);
         }
-
-        _burn(from, assetId, amount);
-        emit AssetsBurned(assetId, from, amount);
     }
-    */
 
     /**
      * @dev Gets the name of an asset type

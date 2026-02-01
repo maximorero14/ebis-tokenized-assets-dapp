@@ -54,11 +54,6 @@ contract PrimaryMarket is
     error PrimaryMarketAssetNotConfigured();
     error PrimaryMarketTransferFailed();
 
-    // Removed errors (not needed after optimization):
-    // error PrimaryMarketInsufficientAssets();
-    // error PrimaryMarketInsufficientBalance();
-    // error PrimaryMarketInsufficientAllowance();
-
     /**
      * @dev Constructor
      * @param _digitalEuro Address of the Digital Euro token contract
@@ -96,75 +91,6 @@ contract PrimaryMarket is
         _assetPrices[assetId] = price;
         emit AssetConfigured(assetId, price);
     }
-
-    /**
-     * @dev OLD VERSION - Performs many unnecessary redundant checks
-     * Balance and allowance checks are already performed by ERC20/ERC1155 contracts
-     * internally, so these checks only waste extra gas without adding real security.
-     * Additionally, they don't prevent race conditions since between the check and the transfer
-     * another transaction can modify the state.
-     */
-    /*
-    function buyAsset_OLD(
-        uint256 assetId,
-        uint256 amount
-    ) external whenNotPaused nonReentrant {
-        if (amount == 0) {
-            revert PrimaryMarketInvalidAmount();
-        }
-
-        // Check asset is configured with a price
-        uint256 price = _assetPrices[assetId];
-        if (price == 0) {
-            revert PrimaryMarketAssetNotConfigured();
-        }
-
-        // Calculate total price
-        uint256 totalPrice = price * amount;
-
-        // Check contract has enough assets available - REDUNDANT
-        uint256 availableAssets = financialAssets.balanceOf(
-            address(this),
-            assetId
-        );
-        if (availableAssets < amount) {
-            revert PrimaryMarketInsufficientAssets();
-        }
-
-        // Check buyer has enough Digital Euro - REDUNDANT
-        uint256 buyerBalance = digitalEuro.balanceOf(msg.sender);
-        if (buyerBalance < totalPrice) {
-            revert PrimaryMarketInsufficientBalance();
-        }
-
-        // Check buyer has approved this contract to spend enough Digital Euro - REDUNDANT
-        uint256 allowance = digitalEuro.allowance(msg.sender, address(this));
-        if (allowance < totalPrice) {
-            revert PrimaryMarketInsufficientAllowance();
-        }
-
-        // Transfer Digital Euro from buyer to fund treasury
-        bool success = digitalEuro.transferFrom(
-            msg.sender,
-            fundTreasury,
-            totalPrice
-        );
-        if (!success) {
-            revert PrimaryMarketTransferFailed();
-        }
-
-        // Transfer assets from contract to buyer
-        financialAssets.safeTransferFrom(
-            address(this),
-            msg.sender,
-            assetId,
-            amount,
-            ""
-        );
-
-        emit AssetPurchased(msg.sender, assetId, amount, totalPrice);
-    }
-    */
 
     /**
      * @dev Allows investors to purchase assets using Digital Euro
