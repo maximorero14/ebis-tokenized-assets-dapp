@@ -1,6 +1,11 @@
 import React from 'react';
+import { useWeb3 } from '../context/Web3Context';
+import { useIsAdmin } from '../hooks/useIsAdmin';
 
 function SecondaryNav({ activeSection, setActiveSection }) {
+    const { account, provider } = useWeb3();
+    const isAdmin = useIsAdmin(account, provider);
+
     return (
         <nav className="secondary-nav">
             <div className="nav-container">
@@ -11,13 +16,15 @@ function SecondaryNav({ activeSection, setActiveSection }) {
                 >
                     Dashboard
                 </a>
-                <a
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); setActiveSection('governance'); }}
-                    className={`nav-link ${activeSection === 'governance' ? 'active' : ''}`}
-                >
-                    Protocol Governance
-                </a>
+                {isAdmin && (
+                    <a
+                        href="#"
+                        onClick={(e) => { e.preventDefault(); setActiveSection('governance'); }}
+                        className={`nav-link ${activeSection === 'governance' ? 'active' : ''}`}
+                    >
+                        Protocol Governance
+                    </a>
+                )}
                 <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); setActiveSection('market'); }}
@@ -31,3 +38,4 @@ function SecondaryNav({ activeSection, setActiveSection }) {
 }
 
 export default SecondaryNav;
+
