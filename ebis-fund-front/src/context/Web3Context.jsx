@@ -25,8 +25,8 @@ const onboard = Onboard({
             id: '0xaa36a7', // 11155111 in hex (Sepolia)
             token: 'ETH',
             label: 'Sepolia Testnet',
-            // RPC Público gratuito para Sepolia (No requiere API Key para pruebas básicas)
-            rpcUrl: 'https://rpc.sepolia.org'
+            // Use Infura RPC for better reliability
+            rpcUrl: import.meta.env.VITE_SEPOLIA_RPC_URL || 'https://rpc.sepolia.org'
         }
     ],
     appMetadata: {

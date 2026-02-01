@@ -13,6 +13,8 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    padding-top: 130px;
+    /* Account for both fixed navbars */
 }
 
 /* Video Background */
@@ -42,8 +44,10 @@ body::before {
 
 /* Navbar - Glass Header */
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
@@ -162,9 +166,11 @@ body::before {
 
 /* Secondary Navigation */
 .secondary-nav {
-    position: sticky;
-    top: 73px;
-    z-index: 999;
+    position: fixed;
+    top: 110px;
+    left: 0;
+    right: 0;
+    z-index: 900;
     background: rgba(10, 11, 30, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -285,12 +291,12 @@ body::before {
 }
 
 .holding-item {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
     align-items: center;
     padding: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .holding-item:last-child {
@@ -298,9 +304,9 @@ body::before {
 }
 
 .holding-left {
-    display: flex;
-    gap: 2rem;
-    flex: 1;
+    display: grid;
+    grid-template-columns: 180px 120px;
+    gap: 1rem;
     align-items: center;
 }
 
@@ -325,8 +331,9 @@ body::before {
 .holding-values {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 0.3rem;
+    min-width: 120px;
 }
 
 /* Stats Grid for Protocol Governance */
