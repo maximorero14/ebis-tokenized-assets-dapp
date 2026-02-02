@@ -1,0 +1,44 @@
+{
+    "name": "Green Future Sustainable Energy Fund",
+    "description": "Fondo especializado en energías renovables y tecnologías limpias. Inversiones en solar, eólica, hidrógeno verde y almacenamiento de energía. Combina rentabilidad financiera con impacto positivo ambiental para el inversor consciente.",
+    "image": "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeihxuffd6gdo6vdchvb4tthdcc2xuiiiydlma444iomlkjzc2mg57i/green_energy.png",
+    "external_url": "https://ebis-euro-capital.com/funds/green-energy",
+    "attributes": [
+        {
+            "trait_type": "Sector",
+            "value": "Energía Renovable"
+        },
+        {
+            "trait_type": "Nivel de Riesgo",
+            "value": "Medio-Alto"
+        },
+        {
+            "trait_type": "Rentabilidad Anual Esperada",
+            "value": "10-15%"
+        },
+        {
+            "trait_type": "Horizonte de Inversión",
+            "value": "5-10 años"
+        },
+        {
+            "trait_type": "Inversión Mínima (DEUR)",
+            "value": "150"
+        },
+        {
+            "trait_type": "Liquidez",
+            "value": "Diaria"
+        },
+        {
+            "trait_type": "Diversificación",
+            "value": "60+ proyectos"
+        },
+        {
+            "trait_type": "Región Geográfica",
+            "value": "Global"
+        },
+        {
+            "trait_type": "ESG Rating",
+            "value": "AAA"
+        }
+    ]
+}

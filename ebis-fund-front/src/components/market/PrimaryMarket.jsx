@@ -11,7 +11,7 @@ const PRIMARY_MARKET_ADDRESS = import.meta.env.VITE_PRIMARY_MARKET_ADDRESS;
 const DIGITAL_EURO_ADDRESS = import.meta.env.VITE_DIGITAL_EURO_ADDRESS;
 
 // Base URI from contract deployment
-const METADATA_BASE_URI = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeignpqpasdhwfe4h5zj3vyfnezmeid3aq36g7h4jt6nktadcihisna";
+const METADATA_BASE_URI = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeigus5qoiqcybdf67q3zv6n72nmm5mqomeibarmzyejug2jvwondbi";
 
 function PrimaryMarket() {
     const { account, provider, isConnected } = useWeb3();
@@ -160,24 +160,32 @@ function PrimaryMarket() {
 
     if (assetsLoading || isLoading) {
         return (
-            <div style={{ textAlign: 'center', padding: '3rem', opacity: 0.7 }}>
-                <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>⏳</div>
-                <div>Loading assets...</div>
-            </div>
+            <section id="primary-market" className="section marketplace">
+                <h2 className="section-title">Primary Market</h2>
+                <div style={{ textAlign: 'center', padding: '3rem', opacity: 0.7 }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>⏳</div>
+                    <div>Loading assets...</div>
+                </div>
+            </section>
         );
     }
 
     if (assetsWithMetadata.length === 0) {
         return (
-            <div style={{ textAlign: 'center', padding: '3rem', opacity: 0.7 }}>
-                <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>📦</div>
-                <div>No assets available in Primary Market</div>
-            </div>
+            <section id="primary-market" className="section marketplace">
+                <h2 className="section-title">Primary Market</h2>
+                <div style={{ textAlign: 'center', padding: '3rem', opacity: 0.7 }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>📦</div>
+                    <div>No assets available in Primary Market</div>
+                </div>
+            </section>
         );
     }
 
     return (
-        <div className="primary-market">
+        <section id="primary-market" className="section marketplace">
+            <h2 className="section-title">Primary Market</h2>
+
             {status && (
                 <div className="status-message">
                     {status}
@@ -258,7 +266,7 @@ function PrimaryMarket() {
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     );
 }
 

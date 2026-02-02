@@ -1,0 +1,44 @@
+{
+    "name": "Goldstone Precious Metals Fund",
+    "description": "Fondo de inversión en metales preciosos con enfoque en oro físico y empresas mineras. Protección contra la inflación y diversificación de cartera. Perfecto para inversores conservadores que buscan preservar capital y cobertura ante volatilidad de mercados.",
+    "image": "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeihxuffd6gdo6vdchvb4tthdcc2xuiiiydlma444iomlkjzc2mg57i/gold_fund.png",
+    "external_url": "https://ebis-euro-capital.com/funds/gold",
+    "attributes": [
+        {
+            "trait_type": "Sector",
+            "value": "Metales Precious"
+        },
+        {
+            "trait_type": "Nivel de Riesgo",
+            "value": "Medio-Bajo"
+        },
+        {
+            "trait_type": "Rentabilidad Anual Esperada",
+            "value": "5-8%"
+        },
+        {
+            "trait_type": "Horizonte de Inversión",
+            "value": "3-5 años"
+        },
+        {
+            "trait_type": "Inversión Mínima (DEUR)",
+            "value": "250"
+        },
+        {
+            "trait_type": "Liquidez",
+            "value": "Semanal"
+        },
+        {
+            "trait_type": "Diversificación",
+            "value": "Oro físico + 30 mineras"
+        },
+        {
+            "trait_type": "Región Geográfica",
+            "value": "Global"
+        },
+        {
+            "trait_type": "ESG Rating",
+            "value": "B+"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "name": "Apex Real Estate Capital Fund",
+    "description": "Fondo inmobiliario diversificado con exposición a propiedades comerciales, residenciales y logística. Ingresos estables a través de rentas y revalorización de activos. Ideal para inversores que buscan flujos de caja predecibles y crecimiento a largo plazo.",
+    "image": "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeihxuffd6gdo6vdchvb4tthdcc2xuiiiydlma444iomlkjzc2mg57i/real_estate.png",
+    "external_url": "https://ebis-euro-capital.com/funds/real-estate",
+    "attributes": [
+        {
+            "trait_type": "Sector",
+            "value": "Inmobiliario"
+        },
+        {
+            "trait_type": "Nivel de Riesgo",
+            "value": "Medio"
+        },
+        {
+            "trait_type": "Rentabilidad Anual Esperada",
+            "value": "7-10%"
+        },
+        {
+            "trait_type": "Horizonte de Inversión",
+            "value": "7-15 años"
+        },
+        {
+            "trait_type": "Inversión Mínima (DEUR)",
+            "value": "500"
+        },
+        {
+            "trait_type": "Liquidez",
+            "value": "Trimestral"
+        },
+        {
+            "trait_type": "Diversificación",
+            "value": "80+ propiedades"
+        },
+        {
+            "trait_type": "Región Geográfica",
+            "value": "Europa Occidental"
+        },
+        {
+            "trait_type": "ESG Rating",
+            "value": "A-"
+        }
+    ]
+}

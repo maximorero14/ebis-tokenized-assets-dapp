@@ -1,0 +1,44 @@
+{
+    "name": "Nexus Technology Fund",
+    "description": "Fondo de inversión especializado en empresas tecnológicas de alto crecimiento. Incluye inversiones en IA, cloud computing, ciberseguridad y semiconductores. Ideal para inversores que buscan exposición al sector tecnológico con gestión profesional.",
+    "image": "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeihxuffd6gdo6vdchvb4tthdcc2xuiiiydlma444iomlkjzc2mg57i/tech_fund.png",
+    "external_url": "https://ebis-euro-capital.com/funds/tech",
+    "attributes": [
+        {
+            "trait_type": "Sector",
+            "value": "Tecnología"
+        },
+        {
+            "trait_type": "Nivel de Riesgo",
+            "value": "Alto"
+        },
+        {
+            "trait_type": "Rentabilidad Anual Esperada",
+            "value": "12-18%"
+        },
+        {
+            "trait_type": "Horizonte de Inversión",
+            "value": "5-10 años"
+        },
+        {
+            "trait_type": "Inversión Mínima (DEUR)",
+            "value": "100"
+        },
+        {
+            "trait_type": "Liquidez",
+            "value": "Diaria"
+        },
+        {
+            "trait_type": "Diversificación",
+            "value": "50+ empresas"
+        },
+        {
+            "trait_type": "Región Geográfica",
+            "value": "Global"
+        },
+        {
+            "trait_type": "ESG Rating",
+            "value": "A"
+        }
+    ]
+}

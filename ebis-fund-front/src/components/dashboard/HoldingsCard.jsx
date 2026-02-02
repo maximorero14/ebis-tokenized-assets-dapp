@@ -183,26 +183,21 @@ function HoldingsCard() {
             <div className="holdings-list">
                 {holdings.map((holding) => (
                     <div key={holding.assetId} className="holding-item">
-                        <div className="holding-left">
-                            <div className="holding-info">
-                                <span className="holding-symbol">{holding.symbol}</span>
-                                <span className="holding-name">{holding.name}</span>
-                            </div>
-                            <div className="holding-values">
-                                <span className="holding-amount">
-                                    {holding.balanceFormatted} tokens
-                                </span>
-                                <span className="holding-price" style={{ fontSize: '0.85rem', opacity: 0.7 }}>
-                                    ID: {holding.assetId}
-                                </span>
-                                <span className="holding-price" style={{ fontSize: '0.85rem', opacity: 0.7 }}>
-                                    {holding.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} DEUR
-                                </span>
-                            </div>
+                        <div className="holding-info">
+                            <span className="holding-symbol">{holding.symbol}</span>
+                            <span className="holding-name">{holding.name}</span>
                         </div>
-                        <button className="btn-sell" disabled>
-                            Sell
-                        </button>
+                        <div className="holding-values">
+                            <span className="holding-amount">
+                                {holding.balanceFormatted} tokens
+                            </span>
+                            <span className="holding-unit-price">
+                                @ {holding.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} DEUR
+                            </span>
+                            <span className="holding-total-value">
+                                {holding.value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} DEUR
+                            </span>
+                        </div>
                     </div>
                 ))}
             </div>

@@ -112,7 +112,7 @@ contract FullSystemDemo is Script {
 
         // Deploy Financial Assets
         string
-            memory baseUri = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeignpqpasdhwfe4h5zj3vyfnezmeid3aq36g7h4jt6nktadcihisna/{id}.json";
+            memory baseUri = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeigus5qoiqcybdf67q3zv6n72nmm5mqomeibarmzyejug2jvwondbi/{id}.json";
         financialAssets = new FinancialAssets(baseUri);
         console.log("\n==> Financial Assets (ERC-1155) deployed");
         console.log("   Address:", address(financialAssets));

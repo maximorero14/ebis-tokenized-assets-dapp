@@ -1,0 +1,44 @@
+{
+    "name": "Cyber Sentinel Security Fund",
+    "description": "Fondo dedicado a la inversión en empresas líderes de ciberseguridad, defensa digital y protección de datos. En un mundo cada vez más conectado, la seguridad digital es una prioridad global.",
+    "image": "ipfs://PLACEHOLDER_CID/cyber_security.png",
+    "external_url": "https://ebis-euro-capital.com/funds/cyber",
+    "attributes": [
+        {
+            "trait_type": "Sector",
+            "value": "Ciberseguridad"
+        },
+        {
+            "trait_type": "Nivel de Riesgo",
+            "value": "Alto"
+        },
+        {
+            "trait_type": "Rentabilidad Anual Esperada",
+            "value": "15-20%"
+        },
+        {
+            "trait_type": "Horizonte de Inversión",
+            "value": "3-7 años"
+        },
+        {
+            "trait_type": "Inversión Mínima (DEUR)",
+            "value": "100"
+        },
+        {
+            "trait_type": "Liquidez",
+            "value": "Semanal"
+        },
+        {
+            "trait_type": "Diversificación",
+            "value": "30+ empresas"
+        },
+        {
+            "trait_type": "Región Geográfica",
+            "value": "Global"
+        },
+        {
+            "trait_type": "ESG Rating",
+            "value": "A-"
+        }
+    ]
+}

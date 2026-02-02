@@ -1,30 +1,11 @@
-import { useWeb3 } from '../../context/Web3Context';
-import { useAssetsList } from '../../hooks/useAssetsList';
+import { useAssets } from '../../context/AssetsContext';
 
 function AllAssetsList() {
-    const { provider } = useWeb3();
-    const { assets, isLoading, refresh } = useAssetsList(provider);
+    const { assets, isLoading } = useAssets();
 
     return (
         <div className="glass-card">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <h3 className="card-title">📋 All Assets</h3>
-                <button
-                    onClick={refresh}
-                    disabled={isLoading}
-                    style={{
-                        padding: '0.5rem 1rem',
-                        background: 'rgba(0, 255, 255, 0.1)',
-                        border: '1px solid rgba(0, 255, 255, 0.3)',
-                        borderRadius: '8px',
-                        color: '#00ffff',
-                        cursor: 'pointer',
-                        fontSize: '0.85rem'
-                    }}
-                >
-                    {isLoading ? '⏳' : '🔄'} Refresh
-                </button>
-            </div>
+            <h3 className="card-title">📋 All Assets</h3>
 
             {isLoading && (
                 <div style={{ textAlign: 'center', padding: '2rem', opacity: 0.7 }}>

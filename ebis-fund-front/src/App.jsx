@@ -4,7 +4,8 @@ import SecondaryNav from './components/SecondaryNav';
 // Sections import will go here
 import Dashboard from './components/sections/Dashboard';
 import ProtocolGovernance from './components/sections/ProtocolGovernance';
-import LiveMarket from './components/sections/LiveMarket';
+import PrimaryMarket from './components/market/PrimaryMarket';
+import SecondaryMarket from './components/market/SecondaryMarket';
 
 function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -24,7 +25,8 @@ function App() {
       <div className="container">
         {activeSection === 'dashboard' && <Dashboard />}
         {activeSection === 'governance' && <ProtocolGovernance />}
-        {activeSection === 'market' && <LiveMarket />}
+        {activeSection === 'primary-market' && <PrimaryMarket />}
+        {activeSection === 'secondary-market' && <SecondaryMarket />}
       </div>
     </>
   );

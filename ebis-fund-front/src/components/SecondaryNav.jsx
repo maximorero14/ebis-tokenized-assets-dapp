@@ -27,10 +27,17 @@ function SecondaryNav({ activeSection, setActiveSection }) {
                 )}
                 <a
                     href="#"
-                    onClick={(e) => { e.preventDefault(); setActiveSection('market'); }}
-                    className={`nav-link ${activeSection === 'market' ? 'active' : ''}`}
+                    onClick={(e) => { e.preventDefault(); setActiveSection('primary-market'); }}
+                    className={`nav-link ${activeSection === 'primary-market' ? 'active' : ''}`}
                 >
-                    Live Market
+                    Primary Market
+                </a>
+                <a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); setActiveSection('secondary-market'); }}
+                    className={`nav-link ${activeSection === 'secondary-market' ? 'active' : ''}`}
+                >
+                    Secondary Market
                 </a>
             </div>
         </nav>

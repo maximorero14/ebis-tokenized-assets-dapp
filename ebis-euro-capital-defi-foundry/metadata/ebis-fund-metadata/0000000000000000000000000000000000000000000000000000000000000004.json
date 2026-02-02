@@ -1,0 +1,44 @@
+{
+    "name": "MediCare Healthcare & Biotech Fund",
+    "description": "Fondo de inversión en el sector salud con exposición a biotecnología, farmacéuticas, dispositivos médicos y servicios sanitarios. Benefíciate del envejecimiento poblacional y avances médicos. Sector defensivo con alto potencial de crecimiento.",
+    "image": "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeihxuffd6gdo6vdchvb4tthdcc2xuiiiydlma444iomlkjzc2mg57i/healthcare.png",
+    "external_url": "https://ebis-euro-capital.com/funds/healthcare",
+    "attributes": [
+        {
+            "trait_type": "Sector",
+            "value": "Salud y Biotecnología"
+        },
+        {
+            "trait_type": "Nivel de Riesgo",
+            "value": "Medio"
+        },
+        {
+            "trait_type": "Rentabilidad Anual Esperada",
+            "value": "9-14%"
+        },
+        {
+            "trait_type": "Horizonte de Inversión",
+            "value": "5-8 años"
+        },
+        {
+            "trait_type": "Inversión Mínima (DEUR)",
+            "value": "200"
+        },
+        {
+            "trait_type": "Liquidez",
+            "value": "Diaria"
+        },
+        {
+            "trait_type": "Diversificación",
+            "value": "70+ empresas"
+        },
+        {
+            "trait_type": "Región Geográfica",
+            "value": "Global"
+        },
+        {
+            "trait_type": "ESG Rating",
+            "value": "A+"
+        }
+    ]
+}

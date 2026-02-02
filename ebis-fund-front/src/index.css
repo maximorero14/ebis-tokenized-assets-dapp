@@ -291,30 +291,23 @@ body::before {
 }
 
 .holding-item {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .holding-item:last-child {
     border-bottom: none;
 }
 
-.holding-left {
-    display: grid;
-    grid-template-columns: 180px 120px;
-    gap: 1rem;
-    align-items: center;
-}
-
 .holding-info {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    min-width: 150px;
+    flex: 0 0 auto;
 }
 
 .holding-symbol {
@@ -333,7 +326,26 @@ body::before {
     flex-direction: column;
     align-items: flex-end;
     gap: 0.3rem;
-    min-width: 120px;
+    flex: 0 0 auto;
+    text-align: right;
+}
+
+.holding-amount {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.holding-unit-price {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+}
+
+.holding-total-value {
+    font-weight: 700;
+    color: #00f2ea;
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
 }
 
 /* Stats Grid for Protocol Governance */
@@ -628,6 +640,25 @@ body::before {
     transform: translateY(-2px);
 }
 
+/* Buy button - Neon Green */
+.market-type-btn.active:first-child {
+    background: linear-gradient(135deg, #39ff14 0%, #00ff88 100%);
+    border-color: transparent;
+    color: #0a0b1e;
+    box-shadow: 0 4px 20px rgba(57, 255, 20, 0.6), 0 0 40px rgba(57, 255, 20, 0.3);
+    font-weight: 800;
+}
+
+/* Sell button - Neon Red */
+.market-type-btn.active:last-child {
+    background: linear-gradient(135deg, #ff0844 0%, #ff3366 100%);
+    border-color: transparent;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(255, 8, 68, 0.6), 0 0 40px rgba(255, 8, 68, 0.3);
+    font-weight: 800;
+}
+
+/* Fallback for generic active state */
 .market-type-btn.active {
     background: linear-gradient(135deg, #00f2ea 0%, #7b2cbf 100%);
     border-color: transparent;
@@ -1066,9 +1097,28 @@ body::before {
 /* Premium Buy Section */
 .premium-buy-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+/* Sell section with full-width button */
+.premium-buy-section.sell-section {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+}
+
+.premium-buy-section.sell-section .premium-input:first-child {
+    grid-column: 1;
+}
+
+.premium-buy-section.sell-section .premium-input:nth-child(2) {
+    grid-column: 1;
+}
+
+.premium-buy-section.sell-section .premium-buy-btn {
+    grid-column: 1;
+    width: 100%;
 }
 
 .premium-input {
@@ -1081,6 +1131,8 @@ body::before {
     font-weight: 600;
     transition: all 0.3s ease;
     font-family: 'Inter', sans-serif;
+    min-width: 0;
+    width: 100%;
 }
 
 .premium-input:focus {

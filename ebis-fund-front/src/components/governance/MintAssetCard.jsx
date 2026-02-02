@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useWeb3 } from '../../context/Web3Context';
-import { useAssetsList } from '../../hooks/useAssetsList';
+import { useAssets } from '../../context/AssetsContext';
 import { ethers } from 'ethers';
 import FinancialAssetsABI from '../../contracts/FinancialAssetsABI.json';
 
@@ -8,7 +8,7 @@ const FINANCIAL_ASSETS_ADDRESS = import.meta.env.VITE_FINANCIAL_ASSETS_ADDRESS;
 
 function MintAssetCard() {
     const { account, provider, isConnected } = useWeb3();
-    const { assets, isLoading: assetsLoading, refresh } = useAssetsList(provider);
+    const { assets, isLoading: assetsLoading } = useAssets();
     const [formData, setFormData] = useState({
         assetId: '',
         amount: ''
@@ -78,26 +78,7 @@ function MintAssetCard() {
             <h3 className="card-title">💰 Mint Asset</h3>
             <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                        <label style={{ margin: 0 }}>Asset ID</label>
-                        <button
-                            type="button"
-                            onClick={refresh}
-                            disabled={assetsLoading}
-                            style={{
-                                padding: '0.25rem 0.75rem',
-                                background: 'rgba(0, 255, 255, 0.1)',
-                                border: '1px solid rgba(0, 255, 255, 0.3)',
-                                borderRadius: '6px',
-                                color: '#00ffff',
-                                cursor: assetsLoading ? 'not-allowed' : 'pointer',
-                                fontSize: '0.75rem',
-                                opacity: assetsLoading ? 0.5 : 1
-                            }}
-                        >
-                            {assetsLoading ? '⏳' : '🔄'} Refresh
-                        </button>
-                    </div>
+                    <label>Asset ID</label>
                     <select
                         value={formData.assetId}
                         onChange={(e) => setFormData({ ...formData, assetId: e.target.value })}

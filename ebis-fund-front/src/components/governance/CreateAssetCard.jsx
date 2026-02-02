@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useWeb3 } from '../../context/Web3Context';
+import { useAssets } from '../../context/AssetsContext';
 import { ethers } from 'ethers';
 import FinancialAssetsABI from '../../contracts/FinancialAssetsABI.json';
 
@@ -7,6 +8,7 @@ const FINANCIAL_ASSETS_ADDRESS = import.meta.env.VITE_FINANCIAL_ASSETS_ADDRESS;
 
 function CreateAssetCard() {
     const { account, provider, isConnected } = useWeb3();
+    const { refreshAssets } = useAssets();
     const [formData, setFormData] = useState({
         assetId: '',
         name: '',
@@ -53,10 +55,17 @@ function CreateAssetCard() {
                 const receipt = await tx.wait();
                 console.log('Transaction confirmed:', receipt);
                 setStatus(`✅ Asset created! Tx: ${receipt.hash.substring(0, 10)}...`);
+
+                // Refresh assets list immediately to update all components
+                console.log('🔄 Refreshing assets list after creation...');
+                await refreshAssets();
             } catch (waitError) {
                 console.warn('Wait error (transaction may still be pending):', waitError);
                 // Transaction was sent but confirmation failed - still show success
                 setStatus(`✅ Asset created! Tx: ${tx.hash.substring(0, 10)}... (Check Etherscan)`);
+
+                // Try to refresh anyway
+                await refreshAssets();
             }
 
             // Reset form
