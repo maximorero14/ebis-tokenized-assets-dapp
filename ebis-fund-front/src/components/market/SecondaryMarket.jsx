@@ -164,6 +164,28 @@ function SecondaryMarket() {
         }
     }, [provider, marketView, account]);
 
+    /**
+     * COMPRA EN MERCADO SECUNDARIO P2P CON DVP ATÓMICO
+     * 
+     * Los activos ya están en ESCROW dentro del contrato Secondary Market
+     * (fueron transferidos cuando el vendedor creó el listing)
+     * 
+     * PASO 1: APPROVAL de DEUR
+     * - Aprobamos al Secondary Market para gastar nuestros DEUR
+     * 
+     * PASO 2: EXECUTE TRADE (Intercambio Atómico)
+     * - Llamamos executeTrade() en el contrato
+     * - El contrato ejecuta ATÓMICAMENTE:
+     *   a) transferFrom() DEUR del comprador al vendedor
+     *   b) safeTransferFrom() activos del escrow al comprador
+     * - Si falla cualquiera, TODA la transacción se revierte
+     * 
+     * VENTAJA DEL ESCROW + DvP:
+     * - El vendedor NO puede retirar sus activos (están bloqueados en escrow)
+     * - El comprador NO puede perder DEUR sin recibir activos
+     * - Intercambio P2P sin intermediarios confiables
+     * - Permite COMPRAS PARCIALES del listing
+     */
     const executeBuy = async (listing) => {
         const amount = buyAmounts[listing.id];
 
@@ -177,7 +199,6 @@ function SecondaryMarket() {
             return;
         }
 
-        // Check if amount exceeds listing amount
         if (parseInt(amount) > parseInt(listing.amount)) {
             setStatus('❌ Amount exceeds available quantity');
             return;
@@ -189,11 +210,9 @@ function SecondaryMarket() {
 
             const signer = await provider.getSigner();
 
-            // Calculate total price
             const totalPrice = listing.pricePerUnit * parseFloat(amount);
             const totalPriceInWei = ethers.parseUnits(totalPrice.toString(), 6);
 
-            // Step 1: Check Allowance
             const deurContract = new ethers.Contract(
                 DIGITAL_EURO_ADDRESS,
                 DigitalEuroABI,
@@ -211,7 +230,6 @@ function SecondaryMarket() {
                 setStatus('✅ Allowance sufficient, skipping approval...');
             }
 
-            // Step 2: Buy asset
             setStatus('⏳ Buying asset...');
             const marketContract = new ethers.Contract(
                 SECONDARY_MARKET_ADDRESS,
@@ -226,7 +244,6 @@ function SecondaryMarket() {
             setStatus(`✅ Purchase successful! Tx: ${receipt.hash.substring(0, 10)}...`);
             setBuyAmounts(prev => ({ ...prev, [listing.id]: '' }));
 
-            // Refresh
             await fetchListings();
 
             setTimeout(() => setStatus(''), 5000);
@@ -244,6 +261,29 @@ function SecondaryMarket() {
         }
     };
 
+    /**
+     * CREAR LISTING (VENDER) EN MERCADO SECUNDARIO P2P CON ESCROW
+     * 
+     * PASO 1: APPROVAL de activos
+     * - Para ERC-1155 usamos setApprovalForAll() en lugar de approve()
+     * - Esto autoriza al Secondary Market a transferir TODOS nuestros activos de este tipo
+     * - Solo necesitamos hacer esto UNA VEZ (queda guardado en blockchain)
+     * 
+     * PASO 2: CREATE LISTING (Los activos van a ESCROW)
+     * - Llamamos createListing() en el contrato
+     * - El contrato ejecuta safeTransferFrom() moviendo los activos:
+     *   FROM: nuestra wallet
+     *   TO: dirección del contrato Secondary Market (ESCROW)
+     * - Los activos quedan BLOQUEADOS en el contrato hasta que:
+     *   a) Alguien compre (ejecute el trade)
+     *   b) Nosotros cancelemos el listing
+     * 
+     * MECANISMO DE ESCROW:
+     * - Una vez en escrow, NO podemos gastar esos activos
+     * - Los compradores tienen GARANTÍA de que los activos existen
+     * - El contrato actúa como "custodio" neutral
+     * - Solo el contrato puede liberar los activos (a comprador o de vuelta a vendedor)
+     */
     const executeCreateListing = async (holding) => {
         const amount = sellAmounts[holding.assetId];
         const pricePerUnit = sellPrices[holding.assetId];
@@ -274,7 +314,6 @@ function SecondaryMarket() {
 
             const signer = await provider.getSigner();
 
-            // Step 1: Check if approved for all
             const assetsContract = new ethers.Contract(
                 FINANCIAL_ASSETS_ADDRESS,
                 FinancialAssetsABI,
@@ -292,7 +331,6 @@ function SecondaryMarket() {
                 setStatus('✅ Already approved, skipping approval...');
             }
 
-            // Step 2: Create listing
             setStatus('⏳ Creating listing...');
             const marketContract = new ethers.Contract(
                 SECONDARY_MARKET_ADDRESS,
@@ -309,7 +347,6 @@ function SecondaryMarket() {
             setSellAmounts(prev => ({ ...prev, [holding.assetId]: '' }));
             setSellPrices(prev => ({ ...prev, [holding.assetId]: '' }));
 
-            // Refresh holdings
             await fetchUserHoldings();
 
             setTimeout(() => setStatus(''), 5000);

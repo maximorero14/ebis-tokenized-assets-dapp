@@ -83,6 +83,31 @@ function PrimaryMarket() {
         fetchMetadata();
     }, [assets, provider]);
 
+    /**
+     * PATRÓN DvP (DELIVERY VS PAYMENT) EN BLOCKCHAIN
+     * 
+     * Este proceso implementa DvP atómico para compra de activos en IPO:
+     * 
+     * PASO 1: APPROVAL (Aprobación de DEUR)
+     * - Primero verificamos si el Primary Market ya tiene allowance suficiente
+     * - Si no, llamamos approve() en el contrato DEUR (ERC-20)
+     * - approve() le da permiso al Primary Market para gastar nuestros DEUR
+     * - Esto NO transfiere fondos, solo autoriza al contrato a hacerlo
+     * 
+     * PASO 2: BUY ASSET (Compra Atómica)
+     * - Llamamos buyAsset() en el Primary Market
+     * - El contrato ejecuta ATÓMICAMENTE (todo o nada):
+     *   a) Transfiere DEUR de nuestra wallet al fundTreasury (usando el allowance)
+     *   b) Transfiere activos del Primary Market a nuestra wallet
+     * - Si falla cualquiera de los dos pasos, TODA la transacción se revierte
+     * - Esto garantiza que no podemos perder DEUR sin recibir activos (y viceversa)
+     * 
+     * VENTAJA DEL DvP:
+     * - Cero riesgo de contraparte
+     * - No puede haber pago sin entrega
+     * - No puede haber entrega sin pago
+     * - Todo sucede en una sola transacción atómica
+     */
     const handleBuy = async (asset) => {
         const amount = buyAmounts[asset.id];
         if (!isConnected) {
@@ -101,11 +126,9 @@ function PrimaryMarket() {
 
             const signer = await provider.getSigner();
 
-            // Calculate total price
             const totalPrice = asset.price * parseFloat(amount);
             const totalPriceInWei = ethers.parseUnits(totalPrice.toString(), 6);
 
-            // Step 1: Check Allowance
             setStatus('⏳ Checking allowance...');
             const deurContract = new ethers.Contract(
                 DIGITAL_EURO_ADDRESS,
@@ -124,7 +147,6 @@ function PrimaryMarket() {
                 setStatus('✅ Allowance sufficient, skipping approval...');
             }
 
-            // Step 2: Buy asset
             setStatus('⏳ Buying asset...');
             const marketContract = new ethers.Contract(
                 PRIMARY_MARKET_ADDRESS,
@@ -136,13 +158,12 @@ function PrimaryMarket() {
             setStatus('⏳ Waiting for purchase confirmation...');
             const receipt = await buyTx.wait();
 
-            setStatus(`✅ Purchase successful! Tx: ${receipt.hash.substring(0, 10)}...`);
+            const txHash = buyTx.hash || receipt?.hash || receipt?.transactionHash || 'unknown';
+            setStatus(`✅ Purchase successful! Tx: ${txHash.substring(0, 10)}...`);
             setBuyAmounts(prev => ({ ...prev, [asset.id]: '' }));
 
-            // Refresh asset data (especially available supply)
             await fetchMetadata();
 
-            // Clear status after 5 seconds
             setTimeout(() => setStatus(''), 5000);
         } catch (error) {
             console.error('Error buying asset:', error);

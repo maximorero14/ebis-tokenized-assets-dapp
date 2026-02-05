@@ -35,9 +35,7 @@ function HoldingsCard() {
                     provider
                 );
 
-                console.log('🔍 Fetching holdings for account:', account);
-                console.log('📍 FinancialAssets address:', FINANCIAL_ASSETS_ADDRESS);
-                console.log('📍 PrimaryMarket address:', PRIMARY_MARKET_ADDRESS);
+                // Instancias de contratos creadas arriba con 'provider' (solo lectura)
 
                 const userHoldings = [];
                 let totalPortfolioValue = 0;
@@ -54,10 +52,27 @@ function HoldingsCard() {
                     console.warn('⚠️ Could not get asset type count, checking IDs 1-10:', error);
                 }
 
-                // Check balance for each asset ID
+                /**
+                 * ESTRATEGIA DE LECTURA DE ACTIVOS (ERC-1155)
+                 * 
+                 * En ERC-1155, los activos se identifican por ID (uint256).
+                 * A diferencia de ERC-20 (un contrato por token), aquí un solo contrato maneja todos.
+                 * 
+                 * Estrategia utilizada aquí:
+                 * 1. Iterar sobre un rango de IDs probables (ej: 1 al 10)
+                 * 2. Verificar si el activo existe (assetExists)
+                 * 3. Consultar balance del usuario (balanceOf)
+                 * 
+                 * NOTA DE OPTIMIZACIÓN:
+                 * Una forma más eficiente (gas-saving) sería usar `balanceOfBatch` para consultar
+                 * múltiples balances en una sola llamada RPC:
+                 * 
+                 * const ids = [1, 2, 3, 4, 5];
+                 * const accounts = Array(5).fill(account);
+                 * const balances = await assetsContract.balanceOfBatch(accounts, ids);
+                 */
                 for (let assetId = 1; assetId <= maxAssetId; assetId++) {
                     try {
-                        // First check if asset exists
                         const exists = await assetsContract.assetExists(assetId);
                         if (!exists) {
                             continue;
@@ -65,10 +80,8 @@ function HoldingsCard() {
 
                         // Check if user has balance for this asset
                         const balance = await assetsContract.balanceOf(account, assetId);
-                        console.log(`Asset ${assetId} balance:`, balance.toString());
 
                         if (balance > 0n) {
-                            // Get asset details
                             const name = await assetsContract.getAssetName(assetId);
                             const symbol = await assetsContract.getAssetSymbol(assetId);
                             const totalSupply = await assetsContract['totalSupply(uint256)'](assetId);
@@ -81,14 +94,6 @@ function HoldingsCard() {
                             const balanceNum = parseFloat(ethers.formatUnits(balance, 0));
                             const holdingValue = balanceNum * pricePerToken;
                             totalPortfolioValue += holdingValue;
-
-                            console.log(`✅ Found asset ${assetId}:`, {
-                                name,
-                                symbol,
-                                balance: balance.toString(),
-                                price: pricePerToken,
-                                value: holdingValue
-                            });
 
                             userHoldings.push({
                                 assetId,

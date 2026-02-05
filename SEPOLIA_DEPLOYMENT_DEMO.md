@@ -17,6 +17,14 @@
 
 > ✅ **Todos los contratos están verificados en Etherscan**
 
+> [!IMPORTANT]
+> **Nota sobre los valores actuales de las wallets:**
+> Después del despliegue inicial y la ejecución del script de demostración documentado en este archivo, se realizaron transacciones adicionales para:
+> - Probar el sistema de forma manual e interactiva
+> - Crear el video demostrativo requerido para el ejercicio
+> 
+> Por lo tanto, **los valores actuales de las wallets en Sepolia pueden no coincidir exactamente** con los balances finales mostrados en este documento. Los datos aquí reflejan el estado al finalizar el script `FullSystemDemo.s.sol`, pero el sistema ha continuado siendo utilizado posteriormente para validación y documentación.
+
 ---
 
 ## 👥 Participants

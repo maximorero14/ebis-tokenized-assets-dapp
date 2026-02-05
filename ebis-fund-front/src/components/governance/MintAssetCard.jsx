@@ -40,8 +40,18 @@ function MintAssetCard() {
                 signer
             );
 
-            // Call mint(uint256 assetId, uint256 amount)
-            // Tokens are automatically sent to PrimaryMarket
+            /**
+             * MINTEO DE ACTIVOS (Emisión de Acciones)
+             * 
+             * Esta función mint() tiene una lógica especial en el contrato:
+             * 1. Solo puede llamarla el FUND_MANAGER
+             * 2. Los tokens NO van a la wallet del caller
+             * 3. Los tokens se envían automáticamente al contrato PRIMARY MARKET
+             * 
+             * ¿Por qué?
+             * Esto asegura que los activos recién emitidos estén inmediatamente
+             * disponibles para la venta (IPO) y nadie pueda acapararlos antes.
+             */
             const tx = await contract.mint(
                 parseInt(formData.assetId),
                 parseInt(formData.amount)

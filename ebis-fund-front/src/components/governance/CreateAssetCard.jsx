@@ -41,7 +41,18 @@ function CreateAssetCard() {
                 signer
             );
 
-            // Call createAssetType(uint256 assetId, string name, string symbol)
+            /**
+             * CREACIÓN DE TIPO DE ACTIVO ERC-1155
+             * 
+             * A diferencia de ERC-20 donde cada token es un contrato,
+             * ERC-1155 permite múltiples tokens en un solo contrato.
+             * 
+             * createAssetType():
+             * - Registra un nuevo ID de activo (ej: ID 1 para "Gold", ID 2 para "Silver")
+             * - Asigna metadatos on-chain (nombre, símbolo)
+             * - No emite tokens todavía (balance es 0)
+             * - Requiere rol de FUND_MANAGER
+             */
             const tx = await contract.createAssetType(
                 parseInt(formData.assetId),
                 formData.name,

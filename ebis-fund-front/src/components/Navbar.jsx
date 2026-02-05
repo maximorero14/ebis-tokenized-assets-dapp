@@ -12,7 +12,20 @@ function Navbar() {
   const [balance, setBalance] = useState('0');
   const [isLoadingBalance, setIsLoadingBalance] = useState(false);
 
-  // Fetch DEUR balance from contract
+  /**
+   * CONSULTA DE BALANCE EN BLOCKCHAIN (OPERACIÓN DE LECTURA)
+   * 
+   * 1. Creamos una instancia del contrato con:
+   *    - Dirección del contrato (donde está desplegado en blockchain)
+   *    - ABI (interfaz que define las funciones del contrato)
+   *    - Provider (para leer de blockchain, NO necesita signer)
+   * 
+   * 2. Llamamos balanceOf(account): función view del contrato ERC-20
+   *    - No requiere gas (es solo lectura)
+   *    - Retorna el balance en unidades mínimas (wei para ETH, pero aquí usa 6 decimales)
+   * 
+   * 3. Convertimos de unidades mínimas a unidades legibles con formatUnits
+   */
   useEffect(() => {
     const fetchBalance = async () => {
       if (!account || !provider || !DIGITAL_EURO_ADDRESS) {
@@ -22,6 +35,7 @@ function Navbar() {
 
       try {
         setIsLoadingBalance(true);
+
         const contract = new ethers.Contract(
           DIGITAL_EURO_ADDRESS,
           DigitalEuroABI,
@@ -31,10 +45,8 @@ function Navbar() {
         const balanceWei = await contract.balanceOf(account);
         const decimals = await contract.decimals();
 
-        // Format balance with proper decimals (6 for DEUR)
         const formattedBalance = ethers.formatUnits(balanceWei, decimals);
 
-        // Format with thousands separator
         const balanceNumber = parseFloat(formattedBalance);
         const balanceFormatted = balanceNumber.toLocaleString('en-US', {
           minimumFractionDigits: 0,
@@ -52,7 +64,6 @@ function Navbar() {
 
     fetchBalance();
 
-    // Refresh balance every 10 seconds
     const interval = setInterval(fetchBalance, 10000);
 
     return () => clearInterval(interval);

@@ -16,11 +16,9 @@ function TransferCard() {
     const handleTransfer = async (e) => {
         e.preventDefault();
 
-        // Reset states
         setError('');
         setTxHash('');
 
-        // Validations
         if (!isConnected) {
             setError('Please connect your wallet first');
             return;
@@ -36,31 +34,46 @@ function TransferCard() {
             return;
         }
 
+        /**
+         * ENVÍO DE TRANSACCIÓN A BLOCKCHAIN (OPERACIÓN DE ESCRITURA)
+         * 
+         * 1. Creamos instancia del contrato con SIGNER (no provider)
+         *    - El signer es necesario para firmar transacciones
+         *    - Las transacciones modifican el estado de blockchain y requieren gas
+         * 
+         * 2. Convertimos la cantidad de DEUR a unidades mínimas (6 decimales)
+         *    - Similar a convertir euros a centavos
+         *    - parseUnits convierte "10.5" DEUR a "10500000" unidades mínimas
+         * 
+         * 3. Ejecutamos transfer() del contrato ERC-20
+         *    - Esta llamada crea una transacción que debe ser firmada por el usuario en MetaMask
+         *    - La transacción se envía a la red y queda pendiente (status: pending)
+         * 
+         * 4. Esperamos confirmación con tx.wait()
+         *    - La transacción se incluye en un bloque
+         *    - Esperamos N confirmaciones (por defecto 1)
+         *    - Solo después de wait() sabemos que la transferencia fue exitosa
+         */
         try {
             setIsLoading(true);
 
-            // Create contract instance
             const contract = new ethers.Contract(
                 DIGITAL_EURO_ADDRESS,
                 DigitalEuroABI,
                 signer
             );
 
-            // Convert amount to proper units (6 decimals for DEUR)
             const amountInWei = ethers.parseUnits(amount, 6);
 
-            // Execute transfer
             const tx = await contract.transfer(recipient, amountInWei);
 
             console.log('Transaction sent:', tx.hash);
             setTxHash(tx.hash);
 
-            // Wait for confirmation
             await tx.wait();
 
             console.log('Transaction confirmed!');
 
-            // Reset form
             setRecipient('');
             setAmount('');
 
@@ -69,7 +82,6 @@ function TransferCard() {
         } catch (err) {
             console.error('Transfer error:', err);
 
-            // Handle specific errors
             if (err.code === 'ACTION_REJECTED') {
                 setError('Transaction rejected by user');
             } else if (err.message.includes('insufficient funds')) {

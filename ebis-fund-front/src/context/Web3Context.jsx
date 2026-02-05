@@ -5,16 +5,24 @@ import injectedModule from '@web3-onboard/injected-wallets';
 
 const Web3Context = createContext();
 
-// Constants - Network configuration from environment variables
-const CHAIN_ID = Number(import.meta.env.VITE_CHAIN_ID) || 11155111; // Default to Sepolia
-const CHAIN_ID_HEX = import.meta.env.VITE_CHAIN_ID_HEX || '0xaa36a7'; // Default to Sepolia
+/**
+ * CONFIGURACIÓN DE RED BLOCKCHAIN
+ * Estas constantes definen a qué red blockchain nos conectamos (Sepolia Testnet)
+ * y se obtienen de las variables de entorno (.env)
+ */
+const CHAIN_ID = Number(import.meta.env.VITE_CHAIN_ID) || 11155111;
+const CHAIN_ID_HEX = import.meta.env.VITE_CHAIN_ID_HEX || '0xaa36a7';
 const NETWORK_NAME = import.meta.env.VITE_NETWORK_NAME || 'Sepolia Testnet';
 const RPC_URL = import.meta.env.VITE_RPC_URL || 'https://rpc.sepolia.org';
 const SELECTED_WALLET_KEY = 'selectedWallet';
 
-// Initialize Web3-Onboard
 const injected = injectedModule();
 
+/**
+ * INICIALIZACIÓN DE WEB3-ONBOARD
+ * Web3-Onboard es la librería que maneja la conexión con wallets (MetaMask, etc.)
+ * y proporciona el "provider" que usaremos para comunicarnos con blockchain
+ */
 const onboard = Onboard({
     wallets: [injected],
     chains: [
@@ -47,7 +55,14 @@ export function Web3Provider({ children }) {
     const [chainId, setChainId] = useState(null);
 
 
-    // Elimina código duplicado y centraliza la lógica
+    /**
+     * INICIALIZACIÓN DEL PROVIDER DE ETHERS.JS
+     * 
+     * Provider: Permite LEER datos de blockchain (balances, estado de contratos, etc.)
+     * Signer: Permite ESCRIBIR en blockchain (enviar transacciones, firmar mensajes)
+     * 
+     * El wallet del usuario (MetaMask) actúa como "signer" para firmar transacciones
+     */
     const initializeProvider = useCallback(async (walletInstance) => {
         try {
             const ethersProvider = new ethers.BrowserProvider(walletInstance.provider);
@@ -86,7 +101,6 @@ export function Web3Provider({ children }) {
             }
         } catch (error) {
             console.error('Error connecting wallet:', error);
-            // Opcional: Puedes agregar un toast/notificación aquí
         }
     }, [initializeProvider]);
 
@@ -98,7 +112,6 @@ export function Web3Provider({ children }) {
             } catch (error) {
                 console.error('Error disconnecting wallet:', error);
             } finally {
-                // Limpia el estado incluso si falla el disconnect
                 setWallet(null);
                 setAccount(null);
                 setProvider(null);
@@ -143,6 +156,14 @@ export function Web3Provider({ children }) {
     }, [initializeProvider]);
 
 
+    /**
+     * EVENT LISTENERS DE LA WALLET
+     * 
+     * accountsChanged: Se dispara cuando el usuario cambia de cuenta en MetaMask
+     * chainChanged: Se dispara cuando el usuario cambia de red (ej: de Sepolia a Mainnet)
+     * 
+     * Estos eventos son nativos de Ethereum Provider API (EIP-1193)
+     */
     useEffect(() => {
         if (!wallet?.provider) return;
 
@@ -165,7 +186,6 @@ export function Web3Provider({ children }) {
                 const newChainId = parseInt(chainIdHex, 16);
                 setChainId(newChainId);
 
-                // Re-inicializa el provider completamente
                 const walletData = await initializeProvider(wallet);
                 setProvider(walletData.provider);
                 setSigner(walletData.signer);

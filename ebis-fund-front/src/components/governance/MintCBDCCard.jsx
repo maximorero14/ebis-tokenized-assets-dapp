@@ -44,10 +44,20 @@ function MintCBDCCard() {
                 signer
             );
 
-            // Convert amount to wei (6 decimals for DEUR)
+            /**
+             * MINTEO DE CBDC (Moneda Digital)
+             * 
+             * Esta función utiliza AccessControl (RBAC):
+             * - Solo cuentas con MINTER_ROLE pueden ejecutar mint()
+             * - Si intentamos llamar esta función desde una cuenta sin rol,
+             *   la transacción puede fallar o revertirse.
+             * 
+             * En OpenZeppelin AccessControl:
+             * - DEFAULT_ADMIN_ROLE (Owner) puede dar y quitar roles
+             * - MINTER_ROLE es quien tiene permiso para emitir dinero
+             */
             const amountInWei = ethers.parseUnits(formData.amount, 6);
 
-            // Call mint(address to, uint256 amount)
             const tx = await contract.mint(formData.recipient, amountInWei);
 
             setStatus('⏳ Waiting for confirmation...');
@@ -55,10 +65,8 @@ function MintCBDCCard() {
 
             setStatus(`✅ DEUR minted successfully! Tx: ${receipt.hash.substring(0, 10)}...`);
 
-            // Reset form
             setFormData({ recipient: '', amount: '' });
 
-            // Clear status after 5 seconds
             setTimeout(() => setStatus(''), 5000);
         } catch (error) {
             console.error('Error minting DEUR:', error);
