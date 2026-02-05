@@ -9,6 +9,8 @@ Aplicación web descentralizada (dApp) para la interacción con el ecosistema de
 [![Foundry](https://img.shields.io/badge/Foundry-Contracts-FFDB1C.svg)](https://getfoundry.sh/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Live on Sepolia](https://img.shields.io/badge/Live-Sepolia%20Testnet-success)](https://sepolia.etherscan.io/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/maximorero14/ebis-tokenized-assets-dapp)
+[![Vercel](https://img.shields.io/badge/Vercel-Deployment-black?logo=vercel)](https://ebis-tokenized-assets-dapp.vercel.app/)
 
 ---
 
@@ -411,7 +413,7 @@ VITE_CHAIN_ID_HEX=0xaa36a7
 #### 1. Clonar el Repositorio
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/maximorero14/ebis-tokenized-assets-dapp.git
 cd ebis-tokenized-assets-dapp
 ```
 
@@ -591,6 +593,12 @@ La aplicación estará disponible en: **http://localhost:5173**
 
 ## 🌐 Demostración en Vivo
 
+### 🚀 Aplicación Web (dApp)
+
+La aplicación se encuentra desplegada y es totalmente funcional en la siguiente URL:
+
+🔗 **[ebis-tokenized-assets-dapp.vercel.app](https://ebis-tokenized-assets-dapp.vercel.app/)**
+
 ### ✅ Contratos Desplegados en Sepolia
 
 | Contrato | Dirección | Etherscan |
@@ -718,4 +726,5 @@ MIT License - Ver archivo [LICENSE](LICENSE)
 **Maximiliano Alexis Morero**
 
 📚 EBIS - Máster en Ingeniería y Desarrollo Blockchain  
-📝 Caso Práctico - Tema 5: Aplicaciones Descentralizadas (dApps)
+📝 Caso Práctico - Tema 5: Aplicaciones Descentralizadas (dApps)  
+🔗 **Repositorio:** [ebis-tokenized-assets-dapp](https://github.com/maximorero14/ebis-tokenized-assets-dapp)
