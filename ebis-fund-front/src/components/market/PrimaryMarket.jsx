@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import FinancialAssetsABI from '../../contracts/FinancialAssetsABI.json';
 import PrimaryMarketABI from '../../contracts/PrimaryMarketABI.json';
 import DigitalEuroABI from '../../contracts/DigitalEuroABI.json';
+import { waitForTransaction } from '../../utils/txUtils';
 
 const FINANCIAL_ASSETS_ADDRESS = import.meta.env.VITE_FINANCIAL_ASSETS_ADDRESS;
 const PRIMARY_MARKET_ADDRESS = import.meta.env.VITE_PRIMARY_MARKET_ADDRESS;
@@ -21,6 +22,13 @@ function PrimaryMarket() {
     const [buyingAsset, setBuyingAsset] = useState(null);
     const [buyAmounts, setBuyAmounts] = useState({});
     const [status, setStatus] = useState('');
+
+    // Scroll to top when status changes to show feedback
+    useEffect(() => {
+        if (status) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [status]);
 
     // Fetch metadata for all assets
     const fetchMetadata = async () => {
@@ -115,8 +123,8 @@ function PrimaryMarket() {
             return;
         }
 
-        if (!amount || parseFloat(amount) <= 0) {
-            setStatus('❌ Please enter a valid amount');
+        if (parseFloat(amount) > parseFloat(asset.availableSupply)) {
+            setStatus('❌ Not enough assets available');
             return;
         }
 
@@ -142,7 +150,10 @@ function PrimaryMarket() {
                 setStatus('⏳ Approving DEUR...');
                 const approveTx = await deurContract.approve(PRIMARY_MARKET_ADDRESS, totalPriceInWei);
                 setStatus('⏳ Waiting for approval confirmation...');
-                await approveTx.wait();
+
+                // Robust waiting for approval with timeout
+                await waitForTransaction(approveTx, provider);
+                setStatus('✅ Approval confirmed!');
             } else {
                 setStatus('✅ Allowance sufficient, skipping approval...');
             }
@@ -156,7 +167,9 @@ function PrimaryMarket() {
 
             const buyTx = await marketContract.buyAsset(asset.id, parseInt(amount));
             setStatus('⏳ Waiting for purchase confirmation...');
-            const receipt = await buyTx.wait();
+
+            // Robust waiting for purchase with timeout
+            const receipt = await waitForTransaction(buyTx, provider);
 
             const txHash = buyTx.hash || receipt?.hash || receipt?.transactionHash || 'unknown';
             setStatus(`✅ Purchase successful! Tx: ${txHash.substring(0, 10)}...`);
@@ -229,9 +242,7 @@ function PrimaryMarket() {
                                 <span className="premium-asset-badge">{asset.symbol}</span>
                             </div>
 
-                            <p className="premium-asset-description">
-                                {asset.metadata?.description || 'No description available'}
-                            </p>
+
 
                             {asset.metadata?.attributes && (
                                 <div className="premium-attributes">

@@ -84,10 +84,34 @@ function TransferCard() {
 
             if (err.code === 'ACTION_REJECTED') {
                 setError('Transaction rejected by user');
+            } else if (err.message.includes('0xe450d38c') || err.data === '0xe450d38c' || (err.info && err.info.error && err.info.error.data && err.info.error.data.startsWith('0xe450d38c'))) {
+                // ERC20InsufficientBalance(address sender, uint256 balance, uint256 needed)
+                // Try to extract data if present in the error string or object
+                let errorData = err.data || (err.info && err.info.error && err.info.error.data);
+
+                // If we don't have the data directly, we might parse it from the message if it's there
+                if (!errorData) {
+                    const match = err.message.match(/(0xe450d38c[a-fA-F0-9]*)/);
+                    if (match) {
+                        errorData = match[1];
+                    }
+                }
+
+                if (errorData && errorData.length >= 202) { // 2 + 8 + 64 + 64 + 64
+                    const balanceHex = '0x' + errorData.substring(74, 138);
+                    const neededHex = '0x' + errorData.substring(138, 202);
+
+                    const balance = ethers.formatUnits(balanceHex, 6);
+                    const needed = ethers.formatUnits(neededHex, 6);
+
+                    setError(`Insufficient funds. Available: ${balance} DEUR. Required: ${needed} DEUR.`);
+                } else {
+                    setError('Insufficient DEUR balance for transfer');
+                }
             } else if (err.message.includes('insufficient funds')) {
                 setError('Insufficient DEUR balance');
             } else {
-                setError(err.message || 'Transfer failed. Please try again.');
+                setError(err.reason || err.message || 'Transfer failed. Please try again.');
             }
         } finally {
             setIsLoading(false);

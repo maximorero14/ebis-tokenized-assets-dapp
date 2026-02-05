@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import SecondaryMarketABI from '../../contracts/SecondaryMarketABI.json';
 import DigitalEuroABI from '../../contracts/DigitalEuroABI.json';
 import FinancialAssetsABI from '../../contracts/FinancialAssetsABI.json';
+import { waitForTransaction } from '../../utils/txUtils';
 
 // Address provided by user
 const SECONDARY_MARKET_ADDRESS = import.meta.env.VITE_SECONDARY_MARKET_ADDRESS;
@@ -22,6 +23,13 @@ function SecondaryMarket() {
     const [buyingListingId, setBuyingListingId] = useState(null);
     const [creatingListingAssetId, setCreatingListingAssetId] = useState(null);
     const [status, setStatus] = useState('');
+
+    // Scroll to top when status changes to show feedback
+    useEffect(() => {
+        if (status) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [status]);
 
     // We need input state similar to PrimaryMarket for buying amounts
     const [buyAmounts, setBuyAmounts] = useState({});
@@ -225,7 +233,10 @@ function SecondaryMarket() {
                 setStatus('⏳ Approving DEUR...');
                 const approveTx = await deurContract.approve(SECONDARY_MARKET_ADDRESS, totalPriceInWei);
                 setStatus('⏳ Waiting for approval confirmation...');
-                await approveTx.wait();
+
+                // Robust waiting for approval with timeout
+                await waitForTransaction(approveTx, provider);
+                setStatus('✅ Approval confirmed!');
             } else {
                 setStatus('✅ Allowance sufficient, skipping approval...');
             }
@@ -239,9 +250,12 @@ function SecondaryMarket() {
 
             const buyTx = await marketContract.executeTrade(listing.id, parseInt(amount));
             setStatus('⏳ Waiting for purchase confirmation...');
-            const receipt = await buyTx.wait();
 
-            setStatus(`✅ Purchase successful! Tx: ${receipt.hash.substring(0, 10)}...`);
+            // Robust waiting for purchase with timeout
+            const receipt = await waitForTransaction(buyTx, provider);
+
+            const txHash = buyTx.hash || receipt?.hash || receipt?.transactionHash || 'unknown';
+            setStatus(`✅ Purchase successful! Tx: ${txHash.substring(0, 10)}...`);
             setBuyAmounts(prev => ({ ...prev, [listing.id]: '' }));
 
             await fetchListings();
@@ -326,7 +340,10 @@ function SecondaryMarket() {
                 setStatus('⏳ Approving Secondary Market to transfer your assets...');
                 const approveTx = await assetsContract.setApprovalForAll(SECONDARY_MARKET_ADDRESS, true);
                 setStatus('⏳ Waiting for approval confirmation...');
-                await approveTx.wait();
+
+                // Robust waiting for approval with timeout
+                await waitForTransaction(approveTx, provider);
+                setStatus('✅ Approval confirmed!');
             } else {
                 setStatus('✅ Already approved, skipping approval...');
             }
@@ -341,9 +358,12 @@ function SecondaryMarket() {
             const priceInWei = ethers.parseUnits(pricePerUnit.toString(), 6);
             const createTx = await marketContract.createListing(holding.assetId, parseInt(amount), priceInWei);
             setStatus('⏳ Waiting for listing confirmation...');
-            const receipt = await createTx.wait();
 
-            setStatus(`✅ Listing created! Tx: ${receipt.hash.substring(0, 10)}...`);
+            // Robust waiting for listing creation
+            const receipt = await waitForTransaction(createTx, provider);
+
+            const txHash = createTx.hash || receipt?.hash || receipt?.transactionHash || 'unknown';
+            setStatus(`✅ Listing created! Tx: ${txHash.substring(0, 10)}...`);
             setSellAmounts(prev => ({ ...prev, [holding.assetId]: '' }));
             setSellPrices(prev => ({ ...prev, [holding.assetId]: '' }));
 
@@ -444,9 +464,7 @@ function SecondaryMarket() {
                                             <span className="premium-asset-badge">ID: {listing.assetId}</span>
                                         </div>
 
-                                        <p className="premium-asset-description">
-                                            {listing.metadata?.description || 'No description available'}
-                                        </p>
+
 
                                         <div className="premium-attributes">
                                             <div className="premium-attribute">
@@ -533,9 +551,7 @@ function SecondaryMarket() {
                                             <span className="premium-asset-badge">{holding.symbol}</span>
                                         </div>
 
-                                        <p className="premium-asset-description">
-                                            {holding.metadata?.description || 'No description available'}
-                                        </p>
+
 
                                         <div className="premium-stats">
                                             <div className="premium-stat">

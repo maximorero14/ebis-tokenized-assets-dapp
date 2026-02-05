@@ -61,13 +61,34 @@ function MintCBDCCard() {
             const tx = await contract.mint(formData.recipient, amountInWei);
 
             setStatus('⏳ Waiting for confirmation...');
-            const receipt = await tx.wait();
 
-            setStatus(`✅ DEUR minted successfully! Tx: ${receipt.hash.substring(0, 10)}...`);
+            // Wait for transaction to be mined
+            let receipt;
+            try {
+                // Explicitly wait for 1 confirmation
+                receipt = await tx.wait(1);
+            } catch (waitError) {
+                console.warn('Wait error, checking receipt manually:', waitError);
+                // Fallback: Check if tx was actually mined using provider directly
+                try {
+                    const txReceipt = await provider.getTransactionReceipt(tx.hash);
+                    if (txReceipt && txReceipt.blockNumber) {
+                        receipt = txReceipt;
+                    } else {
+                        throw waitError;
+                    }
+                } catch (manualCheckError) {
+                    throw waitError; // Throw original error if manual check fails
+                }
+            }
 
-            setFormData({ recipient: '', amount: '' });
-
-            setTimeout(() => setStatus(''), 5000);
+            if (receipt && receipt.status === 1) {
+                setStatus(`✅ DEUR minted successfully! Tx: ${receipt.hash.substring(0, 10)}...`);
+                setFormData({ recipient: '', amount: '' });
+                setTimeout(() => setStatus(''), 5000);
+            } else {
+                setStatus('❌ Transaction failed on-chain.');
+            }
         } catch (error) {
             console.error('Error minting DEUR:', error);
             if (error.code === 'ACTION_REJECTED') {
