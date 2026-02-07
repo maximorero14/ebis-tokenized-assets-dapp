@@ -149,3 +149,9 @@ firebase-debug.log
 secrets.json
 .secrets/
 private/
+
+# ===========================
+# Media Files
+# ===========================
+# Video files
+EBIS - Practico 5 - Final.mp4
