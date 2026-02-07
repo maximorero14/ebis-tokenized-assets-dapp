@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useWeb3 } from '../../context/Web3Context';
 import { ethers } from 'ethers';
 import DigitalEuroABI from '../../contracts/DigitalEuroABI.json';
+import { waitForTransaction } from '../../utils/txUtils';
 
 const DIGITAL_EURO_ADDRESS = import.meta.env.VITE_DIGITAL_EURO_ADDRESS;
 
@@ -62,30 +63,15 @@ function MintCBDCCard() {
 
             setStatus('⏳ Waiting for confirmation...');
 
-            // Wait for transaction to be mined
-            let receipt;
-            try {
-                // Explicitly wait for 1 confirmation
-                receipt = await tx.wait(1);
-            } catch (waitError) {
-                console.warn('Wait error, checking receipt manually:', waitError);
-                // Fallback: Check if tx was actually mined using provider directly
-                try {
-                    const txReceipt = await provider.getTransactionReceipt(tx.hash);
-                    if (txReceipt && txReceipt.blockNumber) {
-                        receipt = txReceipt;
-                    } else {
-                        throw waitError;
-                    }
-                } catch (manualCheckError) {
-                    throw waitError; // Throw original error if manual check fails
-                }
-            }
+            setStatus('⏳ Waiting for confirmation...');
+
+            // Robust waiting for confirmation with timeout
+            const receipt = await waitForTransaction(tx, provider);
 
             if (receipt && receipt.status === 1) {
                 setStatus(`✅ DEUR minted successfully! Tx: ${receipt.hash.substring(0, 10)}...`);
                 setFormData({ recipient: '', amount: '' });
-                setTimeout(() => setStatus(''), 5000);
+                setTimeout(() => setStatus(''), 10000);
             } else {
                 setStatus('❌ Transaction failed on-chain.');
             }

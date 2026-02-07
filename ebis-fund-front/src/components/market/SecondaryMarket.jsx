@@ -12,7 +12,7 @@ const DIGITAL_EURO_ADDRESS = import.meta.env.VITE_DIGITAL_EURO_ADDRESS;
 const FINANCIAL_ASSETS_ADDRESS = import.meta.env.VITE_FINANCIAL_ASSETS_ADDRESS;
 
 // Base URI from contract deployment
-const METADATA_BASE_URI = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeigus5qoiqcybdf67q3zv6n72nmm5mqomeibarmzyejug2jvwondbi";
+const METADATA_BASE_URI = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeid42im5sn3kgswi5fgemsql66pp4s75gr62idcwsoxkutqk3odbvy";
 
 function SecondaryMarket() {
     const { account, provider, isConnected } = useWeb3();
@@ -260,7 +260,7 @@ function SecondaryMarket() {
 
             await fetchListings();
 
-            setTimeout(() => setStatus(''), 5000);
+            setTimeout(() => setStatus(''), 10000);
         } catch (error) {
             console.error('Error buying asset:', error);
             if (error.code === 'ACTION_REJECTED') {
@@ -369,7 +369,7 @@ function SecondaryMarket() {
 
             await fetchUserHoldings();
 
-            setTimeout(() => setStatus(''), 5000);
+            setTimeout(() => setStatus(''), 10000);
         } catch (error) {
             console.error('Error creating listing:', error);
             if (error.code === 'ACTION_REJECTED') {

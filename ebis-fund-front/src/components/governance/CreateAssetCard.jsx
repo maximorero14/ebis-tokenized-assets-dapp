@@ -3,6 +3,7 @@ import { useWeb3 } from '../../context/Web3Context';
 import { useAssets } from '../../context/AssetsContext';
 import { ethers } from 'ethers';
 import FinancialAssetsABI from '../../contracts/FinancialAssetsABI.json';
+import { waitForTransaction } from '../../utils/txUtils';
 
 const FINANCIAL_ASSETS_ADDRESS = import.meta.env.VITE_FINANCIAL_ASSETS_ADDRESS;
 
@@ -62,28 +63,20 @@ function CreateAssetCard() {
             console.log('Transaction sent:', tx.hash);
             setStatus(`⏳ Waiting for confirmation... Tx: ${tx.hash.substring(0, 10)}...`);
 
-            try {
-                const receipt = await tx.wait();
-                console.log('Transaction confirmed:', receipt);
-                setStatus(`✅ Asset created! Tx: ${receipt.hash.substring(0, 10)}...`);
+            const receipt = await waitForTransaction(tx, provider);
 
-                // Refresh assets list immediately to update all components
-                console.log('🔄 Refreshing assets list after creation...');
-                await refreshAssets();
-            } catch (waitError) {
-                console.warn('Wait error (transaction may still be pending):', waitError);
-                // Transaction was sent but confirmation failed - still show success
-                setStatus(`✅ Asset created! Tx: ${tx.hash.substring(0, 10)}... (Check Etherscan)`);
+            console.log('Transaction confirmed:', receipt);
+            setStatus(`✅ Asset created! Tx: ${receipt.hash.substring(0, 10)}...`);
 
-                // Try to refresh anyway
-                await refreshAssets();
-            }
+            // Refresh assets list immediately to update all components
+            console.log('🔄 Refreshing assets list after creation...');
+            await refreshAssets();
 
             // Reset form
             setFormData({ assetId: '', name: '', symbol: '' });
 
             // Clear status after 5 seconds
-            setTimeout(() => setStatus(''), 5000);
+            setTimeout(() => setStatus(''), 10000);
         } catch (error) {
             console.error('Error creating asset:', error);
             if (error.code === 'ACTION_REJECTED') {

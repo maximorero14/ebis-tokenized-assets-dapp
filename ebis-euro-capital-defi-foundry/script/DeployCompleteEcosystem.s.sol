@@ -19,7 +19,7 @@ contract DeployCompleteEcosystem is Script {
 
         // 2. Deploy FinancialAssets
         string
-            memory baseUri = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeigus5qoiqcybdf67q3zv6n72nmm5mqomeibarmzyejug2jvwondbi/{id}.json";
+            memory baseUri = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeid42im5sn3kgswi5fgemsql66pp4s75gr62idcwsoxkutqk3odbvy/{id}.json";
         FinancialAssets financialAssets = new FinancialAssets(baseUri);
         console.log("FinancialAssets deployed at:", address(financialAssets));
 

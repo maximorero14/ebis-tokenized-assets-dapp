@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useWeb3 } from '../../context/Web3Context';
 import { useAssetsList } from '../../hooks/useAssetsList';
 import { ethers } from 'ethers';
-import FinancialAssetsABI from '../../contracts/FinancialAssetsABI.json';
 import PrimaryMarketABI from '../../contracts/PrimaryMarketABI.json';
 import DigitalEuroABI from '../../contracts/DigitalEuroABI.json';
 import { waitForTransaction } from '../../utils/txUtils';
@@ -12,7 +11,7 @@ const PRIMARY_MARKET_ADDRESS = import.meta.env.VITE_PRIMARY_MARKET_ADDRESS;
 const DIGITAL_EURO_ADDRESS = import.meta.env.VITE_DIGITAL_EURO_ADDRESS;
 
 // Base URI from contract deployment
-const METADATA_BASE_URI = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeigus5qoiqcybdf67q3zv6n72nmm5mqomeibarmzyejug2jvwondbi";
+const METADATA_BASE_URI = "https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeid42im5sn3kgswi5fgemsql66pp4s75gr62idcwsoxkutqk3odbvy";
 
 function PrimaryMarket() {
     const { account, provider, isConnected } = useWeb3();
@@ -177,7 +176,7 @@ function PrimaryMarket() {
 
             await fetchMetadata();
 
-            setTimeout(() => setStatus(''), 5000);
+            setTimeout(() => setStatus(''), 10000);
         } catch (error) {
             console.error('Error buying asset:', error);
             if (error.code === 'ACTION_REJECTED') {

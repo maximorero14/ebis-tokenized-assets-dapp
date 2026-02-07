@@ -1,8 +1,7 @@
 # 🌐 Sepolia Testnet Deployment - Live Demo
 
 **Network:** Sepolia Testnet (Chain ID: 11155111)  
-**Demo Script:** `ebis-euro-capital-defi-foundry/script/FullSystemDemo.s.sol`  
-**Deployment Block:** 10174739 - 10174781
+**Demo Script:** `ebis-euro-capital-defi-foundry/script/FullSystemDemo.s.sol` 
 
 ---
 
@@ -10,10 +9,10 @@
 
 | Contrato | Dirección | Etherscan |
 |----------|-----------|-----------|
-| **Digital Euro (DEUR)** | `0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C) |
-| **Financial Assets (ERC-1155)** | `0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130) |
-| **Primary Market (IPO)** | `0x2e329AE807c91f37bc4e49cB94A67328cFE34d35` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0x2e329AE807c91f37bc4e49cB94A67328cFE34d35) |
-| **Secondary Market (P2P)** | `0x30333d882c50c1A28D56572088051f7932c201f2` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0x30333d882c50c1A28D56572088051f7932c201f2) |
+| **Digital Euro (DEUR)** | `0x5aE69a270f061d8435100938b2Cef210D1f8348F` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0x5aE69a270f061d8435100938b2Cef210D1f8348F) |
+| **Financial Assets (ERC-1155)** | `0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c) |
+| **Primary Market (IPO)** | `0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3) |
+| **Secondary Market (P2P)** | `0x8B86642180149a22c2e06647342f8E250BE5F23B` | [Ver en Etherscan](https://sepolia.etherscan.io/address/0x8B86642180149a22c2e06647342f8E250BE5F23B) |
 
 > ✅ **Todos los contratos están verificados en Etherscan**
 
@@ -77,16 +76,16 @@ PHASE 1: SYSTEM DEPLOYMENT
 ======================================================================
 
 ===> Digital Euro (DEUR) deployed
-   Address: 0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C
+   Address: 0x5aE69a270f061d8435100938b2Cef210D1f8348F
 
 ===> Financial Assets (ERC-1155) deployed
-   Address: 0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130
+   Address: 0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c
 
 ===> Primary Market (IPO) deployed
-   Address: 0x2e329AE807c91f37bc4e49cB94A67328cFE34d35
+   Address: 0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3
 
 ===> Secondary Market (P2P) deployed
-   Address: 0x30333d882c50c1A28D56572088051f7932c201f2
+   Address: 0x8B86642180149a22c2e06647342f8E250BE5F23B
 
 ===> Configuring Primary Market in Financial Assets...
    Primary Market configured successfully
@@ -275,15 +274,15 @@ PHASE 6: SECONDARY MARKET - P2P TRADING (DvP)
 
 ### Contract Verification
 All contracts have been successfully verified on Etherscan:
-- ✅ DigitalEuro: [Verified](https://sepolia.etherscan.io/address/0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C#code)
-- ✅ FinancialAssets: [Verified](https://sepolia.etherscan.io/address/0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130#code)
-- ✅ PrimaryMarket: [Verified](https://sepolia.etherscan.io/address/0x2e329AE807c91f37bc4e49cB94A67328cFE34d35#code)
-- ✅ SecondaryMarket: [Verified](https://sepolia.etherscan.io/address/0x30333d882c50c1A28D56572088051f7932c201f2#code)
+- ✅ DigitalEuro: [Verified](https://sepolia.etherscan.io/address/0x5aE69a270f061d8435100938b2Cef210D1f8348F#code)
+- ✅ FinancialAssets: [Verified](https://sepolia.etherscan.io/address/0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c#code)
+- ✅ PrimaryMarket: [Verified](https://sepolia.etherscan.io/address/0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3#code)
+- ✅ SecondaryMarket: [Verified](https://sepolia.etherscan.io/address/0x8B86642180149a22c2e06647342f8E250BE5F23B#code)
 
 ### Metadata URI
 Financial Assets metadata is hosted on IPFS via Pinata:
 ```
-https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeigus5qoiqcybdf67q3zv6n72nmm5mqomeibarmzyejug2jvwondbi/{id}.json
+https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/bafybeid42im5sn3kgswi5fgemsql66pp4s75gr62idcwsoxkutqk3odbvy/{id}.json
 ```
 
 ---

@@ -24,12 +24,10 @@ export const waitForTransaction = async (tx, provider, timeoutMs = 15000) => {
                     return receipt;
                 } else {
                     console.warn('Manual check: Transaction still pending or not found.');
-                    // Optionally, you could return null here or throw. 
-                    // For UI purposes, if we timed out AND didn't find a receipt, 
-                    // we might want to say "Transaction sent, waiting for network..." 
-                    // or just return null so the consume can decide.
-                    // But to be "safe", let's behave like it's still pending.
-                    throw new Error('Transaction taking longer than expected. Check wallet for status.');
+                    console.log('Transaction taking longer than expected. Reloading page...');
+                    //window.location.reload();
+                    // Return a dummy receipt to prevent further errors before reload
+                    return { hash: tx.hash, status: 'pending' };
                 }
             } catch (manualError) {
                 throw manualError;

@@ -125,6 +125,7 @@ ebis-fund-front/
 │   │   ├── governance/
 │   │   │   ├── MintCBDCCard.jsx          # 🏦 Mintear DEUR (solo owner)
 │   │   │   ├── CreateAssetCard.jsx       # ➕ Crear nuevos fondos
+│   │   │   ├── ConfigureAssetPriceCard.jsx # 💰 Configurar precios de fondos
 │   │   │   ├── MintAssetCard.jsx         # 📊 Mintear shares de fondos
 │   │   │   └── AllAssetsList.jsx         # 📋 Lista de todos los fondos
 │   │   ├── market/
@@ -258,6 +259,25 @@ await tx.wait();
 
 **Restricción:** Requiere rol `FUND_MANAGER_ROLE`.
 
+#### Configurar Precio de Asset (Solo Fund Manager)
+
+**Componente:** `ConfigureAssetPriceCard.jsx`
+
+```javascript
+const contract = new ethers.Contract(PRIMARY_MARKET_ADDRESS, PrimaryMarketABI, signer);
+const priceInWei = ethers.parseUnits(price.toString(), 6); // 6 decimales para DEUR
+const tx = await contract.configureAsset(assetId, priceInWei);
+await tx.wait();
+```
+
+**Restricción:** Requiere rol `FUND_MANAGER_ROLE`.
+
+**Características:**
+- ✅ Establece el precio de venta en el mercado primario (IPO)
+- ✅ Precio en DEUR con 6 decimales
+- ✅ Dropdown con todos los assets disponibles
+- ✅ Validación de precio (debe ser > 0)
+
 #### Mintear Asset Shares (Solo Fund Manager)
 
 **Componente:** `MintAssetCard.jsx`
@@ -384,10 +404,10 @@ done
 
 ```bash
 # ebis-fund-front/.env
-VITE_DIGITAL_EURO_ADDRESS=0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C
-VITE_FINANCIAL_ASSETS_ADDRESS=0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130
-VITE_PRIMARY_MARKET_ADDRESS=0x2e329AE807c91f37bc4e49cB94A67328cFE34d35
-VITE_SECONDARY_MARKET_ADDRESS=0x30333d882c50c1A28D56572088051f7932c201f2
+VITE_DIGITAL_EURO_ADDRESS=0x5aE69a270f061d8435100938b2Cef210D1f8348F
+VITE_FINANCIAL_ASSETS_ADDRESS=0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c
+VITE_PRIMARY_MARKET_ADDRESS=0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3
+VITE_SECONDARY_MARKET_ADDRESS=0x8B86642180149a22c2e06647342f8E250BE5F23B
 VITE_CHAIN_ID=11155111
 VITE_CHAIN_ID_HEX=0xaa36a7
 ```
@@ -438,10 +458,10 @@ cp .env.example .env
 
 ```bash
 # Direcciones de Contratos en Sepolia
-VITE_DIGITAL_EURO_ADDRESS=0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C
-VITE_FINANCIAL_ASSETS_ADDRESS=0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130
-VITE_PRIMARY_MARKET_ADDRESS=0x2e329AE807c91f37bc4e49cB94A67328cFE34d35
-VITE_SECONDARY_MARKET_ADDRESS=0x30333d882c50c1A28D56572088051f7932c201f2
+VITE_DIGITAL_EURO_ADDRESS=0x5aE69a270f061d8435100938b2Cef210D1f8348F
+VITE_FINANCIAL_ASSETS_ADDRESS=0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c
+VITE_PRIMARY_MARKET_ADDRESS=0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3
+VITE_SECONDARY_MARKET_ADDRESS=0x8B86642180149a22c2e06647342f8E250BE5F23B
 
 # Configuración de Red
 VITE_CHAIN_ID=11155111
@@ -523,6 +543,16 @@ La aplicación estará disponible en: **http://localhost:5173**
    - Clic en **"Create"**
    - Confirma en MetaMask
 
+#### Configurar Precio de Asset
+
+1. En **"Configure Asset Price"**:
+   - Selecciona el fondo del dropdown
+   - Ingresa el precio por share en DEUR (ej: 100)
+   - Clic en **"Set Price"**
+   - Confirma en MetaMask
+
+**Nota:** Este precio será usado en el Primary Market para las compras IPO.
+
 #### Mintear Asset Shares
 
 1. En **"Mint Asset"**:
@@ -603,10 +633,10 @@ La aplicación se encuentra desplegada y es totalmente funcional en la siguiente
 
 | Contrato | Dirección | Etherscan |
 |----------|-----------|-----------|
-| **Digital Euro** | `0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C` | [🔍 Ver](https://sepolia.etherscan.io/address/0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C) |
-| **Financial Assets** | `0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130` | [🔍 Ver](https://sepolia.etherscan.io/address/0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130) |
-| **Primary Market** | `0x2e329AE807c91f37bc4e49cB94A67328cFE34d35` | [🔍 Ver](https://sepolia.etherscan.io/address/0x2e329AE807c91f37bc4e49cB94A67328cFE34d35) |
-| **Secondary Market** | `0x30333d882c50c1A28D56572088051f7932c201f2` | [🔍 Ver](https://sepolia.etherscan.io/address/0x30333d882c50c1A28D56572088051f7932c201f2) |
+| **Digital Euro** | `0x5aE69a270f061d8435100938b2Cef210D1f8348F` | [🔍 Ver](https://sepolia.etherscan.io/address/0x5aE69a270f061d8435100938b2Cef210D1f8348F) |
+| **Financial Assets** | `0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c` | [🔍 Ver](https://sepolia.etherscan.io/address/0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c) |
+| **Primary Market** | `0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3` | [🔍 Ver](https://sepolia.etherscan.io/address/0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3) |
+| **Secondary Market** | `0x8B86642180149a22c2e06647342f8E250BE5F23B` | [🔍 Ver](https://sepolia.etherscan.io/address/0x8B86642180149a22c2e06647342f8E250BE5F23B) |
 
 ✅ **Todos los contratos están verificados en Etherscan**
 
@@ -624,7 +654,7 @@ La aplicación se encuentra desplegada y es totalmente funcional en la siguiente
 **Metadata URI Base:**
 ```
 https://amethyst-accessible-lemming-653.mypinata.cloud/ipfs/
-  bafybeigus5qoiqcybdf67q3zv6n72nmm5mqomeibarmzyejug2jvwondbi/{id}.json
+  bafybeid42im5sn3kgswi5fgemsql66pp4s75gr62idcwsoxkutqk3odbvy/{id}.json
 ```
 
 📄 **Logs completos del deployment:** [SEPOLIA_DEPLOYMENT_DEMO.md](./SEPOLIA_DEPLOYMENT_DEMO.md)

@@ -2,18 +2,16 @@ import { useState } from 'react';
 import { useWeb3 } from '../../context/Web3Context';
 import { useAssets } from '../../context/AssetsContext';
 import { ethers } from 'ethers';
-import FinancialAssetsABI from '../../contracts/FinancialAssetsABI.json';
+import PrimaryMarketABI from '../../contracts/PrimaryMarketABI.json';
 import { waitForTransaction } from '../../utils/txUtils';
 
-const FINANCIAL_ASSETS_ADDRESS = import.meta.env.VITE_FINANCIAL_ASSETS_ADDRESS;
+const PRIMARY_MARKET_ADDRESS = import.meta.env.VITE_PRIMARY_MARKET_ADDRESS;
 
-function MintAssetCard() {
+function ConfigureAssetPriceCard() {
     const { account, provider, isConnected } = useWeb3();
     const { assets, isLoading: assetsLoading } = useAssets();
-    const [formData, setFormData] = useState({
-        assetId: '',
-        amount: ''
-    });
+    const [selectedAssetId, setSelectedAssetId] = useState('');
+    const [price, setPrice] = useState('');
     const [status, setStatus] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -25,57 +23,66 @@ function MintAssetCard() {
             return;
         }
 
-        if (!formData.assetId || !formData.amount) {
-            setStatus('❌ Please fill all fields');
+        if (!selectedAssetId) {
+            setStatus('❌ Please select an asset');
+            return;
+        }
+
+        if (!price || parseFloat(price) <= 0) {
+            setStatus('❌ Price must be greater than 0');
             return;
         }
 
         try {
             setIsLoading(true);
-            setStatus('⏳ Minting assets...');
+            setStatus('⏳ Configuring asset price...');
 
             const signer = await provider.getSigner();
             const contract = new ethers.Contract(
-                FINANCIAL_ASSETS_ADDRESS,
-                FinancialAssetsABI,
+                PRIMARY_MARKET_ADDRESS,
+                PrimaryMarketABI,
                 signer
             );
 
             /**
-             * MINTEO DE ACTIVOS (Emisión de Acciones)
+             * CONFIGURACIÓN DE PRECIO EN PRIMARY MARKET
              * 
-             * Esta función mint() tiene una lógica especial en el contrato:
-             * 1. Solo puede llamarla el FUND_MANAGER
-             * 2. Los tokens NO van a la wallet del caller
-             * 3. Los tokens se envían automáticamente al contrato PRIMARY MARKET
+             * configureAsset(assetId, price):
+             * - Establece el precio de un asset en el mercado primario
+             * - El precio se almacena en wei (6 decimales para DEUR)
+             * - Requiere rol FUND_MANAGER_ROLE
+             * - Emite evento AssetConfigured(assetId, price)
              * 
-             * ¿Por qué?
-             * Esto asegura que los activos recién emitidos estén inmediatamente
-             * disponibles para la venta (IPO) y nadie pueda acapararlos antes.
+             * Este precio será usado por buyAsset() para calcular el costo total
+             * de la compra: totalPrice = price * amount
              */
-            const tx = await contract.mint(
-                parseInt(formData.assetId),
-                parseInt(formData.amount)
+            const priceInWei = ethers.parseUnits(price.toString(), 6);
+
+            const tx = await contract.configureAsset(
+                parseInt(selectedAssetId),
+                priceInWei
             );
 
-            setStatus('⏳ Waiting for confirmation...');
+            console.log('Transaction sent:', tx.hash);
+            setStatus(`⏳ Waiting for confirmation... Tx: ${tx.hash.substring(0, 10)}...`);
+
             const receipt = await waitForTransaction(tx, provider);
 
-            setStatus(`✅ Assets minted to PrimaryMarket! Tx: ${receipt.hash.substring(0, 10)}...`);
+            console.log('Transaction confirmed:', receipt);
+            setStatus(`✅ Price configured! Tx: ${receipt.hash.substring(0, 10)}...`);
 
             // Reset form
-            setFormData({ assetId: '', amount: '' });
+            setSelectedAssetId('');
+            setPrice('');
 
             // Clear status after 5 seconds
             setTimeout(() => setStatus(''), 10000);
         } catch (error) {
-            console.error('Error minting assets:', error);
+            console.error('Error configuring price:', error);
             if (error.code === 'ACTION_REJECTED') {
                 setStatus('❌ Transaction rejected by user');
-            } else if (error.message.includes('InvalidAssetId')) {
-                setStatus('❌ Invalid asset ID');
-            } else if (error.message.includes('PrimaryMarketNotSet')) {
-                setStatus('❌ Primary market not configured');
+            } else if (error.message.includes('AccessControlUnauthorizedAccount')) {
+                setStatus('❌ You do not have FUND_MANAGER_ROLE');
             } else {
                 setStatus(`❌ Error: ${error.message.substring(0, 50)}...`);
             }
@@ -86,13 +93,13 @@ function MintAssetCard() {
 
     return (
         <div className="glass-card">
-            <h3 className="card-title">💰 Mint Asset</h3>
+            <h3 className="card-title">💰 Configure Asset Price</h3>
             <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label>Asset ID</label>
                     <select
-                        value={formData.assetId}
-                        onChange={(e) => setFormData({ ...formData, assetId: e.target.value })}
+                        value={selectedAssetId}
+                        onChange={(e) => setSelectedAssetId(e.target.value)}
                         disabled={isLoading || assetsLoading}
                         style={{
                             width: '100%',
@@ -124,17 +131,18 @@ function MintAssetCard() {
                     )}
                 </div>
                 <div className="input-group">
-                    <label>Amount</label>
+                    <label>Price (DEUR)</label>
                     <input
                         type="number"
-                        placeholder="100"
-                        value={formData.amount}
-                        onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+                        placeholder="e.g., 100"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
                         disabled={isLoading}
-                        min="1"
+                        min="0.000001"
+                        step="0.000001"
                     />
-                    <small style={{ opacity: 0.7, fontSize: '0.85rem' }}>
-                        Tokens will be minted to PrimaryMarket contract
+                    <small style={{ opacity: 0.7, fontSize: '0.85rem', marginTop: '0.25rem' }}>
+                        Price per share in Digital Euro
                     </small>
                 </div>
                 {status && (
@@ -153,11 +161,11 @@ function MintAssetCard() {
                     className="btn-primary"
                     disabled={isLoading || !isConnected || assets.length === 0}
                 >
-                    {isLoading ? 'Minting...' : 'Mint Asset'}
+                    {isLoading ? 'Setting Price...' : 'Set Price'}
                 </button>
             </form>
         </div>
     );
 }
 
-export default MintAssetCard;
+export default ConfigureAssetPriceCard;

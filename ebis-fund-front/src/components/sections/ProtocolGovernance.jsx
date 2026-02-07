@@ -4,6 +4,7 @@ import MintCBDCCard from '../governance/MintCBDCCard';
 import MintAssetCard from '../governance/MintAssetCard';
 import AllAssetsList from '../governance/AllAssetsList';
 import CreateAssetCard from '../governance/CreateAssetCard';
+import ConfigureAssetPriceCard from '../governance/ConfigureAssetPriceCard';
 
 function ProtocolGovernance() {
     return (
@@ -12,9 +13,10 @@ function ProtocolGovernance() {
             <AssetsProvider>
                 <div className="governance-grid">
                     <MintCBDCCard />
+                    <CreateAssetCard />
+                    <ConfigureAssetPriceCard />
                     <MintAssetCard />
                     <AllAssetsList />
-                    <CreateAssetCard />
                 </div>
             </AssetsProvider>
         </section>

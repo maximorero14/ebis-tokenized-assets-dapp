@@ -26,16 +26,16 @@ Script ran successfully.
   ======================================================================
 
   ==> Digital Euro (DEUR) deployed
-     Address: 0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C
+     Address: 0x5aE69a270f061d8435100938b2Cef210D1f8348F
   
 ==> Financial Assets (ERC-1155) deployed
-     Address: 0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130
+     Address: 0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c
   
 ==> Primary Market (IPO) deployed
-     Address: 0x2e329AE807c91f37bc4e49cB94A67328cFE34d35
+     Address: 0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3
   
 ==> Secondary Market (P2P) deployed
-     Address: 0x30333d882c50c1A28D56572088051f7932c201f2
+     Address: 0x8B86642180149a22c2e06647342f8E250BE5F23B
   
 ==> Configuring Primary Market in Financial Assets...
      Primary Market configured successfully
@@ -213,10 +213,10 @@ Script ran successfully.
   ======================================================================
 
   ==> Core Contracts:
-     DigitalEuro (DEUR):      0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C
-     FinancialAssets (ERC1155): 0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130
-     PrimaryMarket (IPO):     0x2e329AE807c91f37bc4e49cB94A67328cFE34d35
-     SecondaryMarket (P2P):   0x30333d882c50c1A28D56572088051f7932c201f2
+     DigitalEuro (DEUR):      0x5aE69a270f061d8435100938b2Cef210D1f8348F
+     FinancialAssets (ERC1155): 0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c
+     PrimaryMarket (IPO):     0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3
+     SecondaryMarket (P2P):   0x8B86642180149a22c2e06647342f8E250BE5F23B
   ======================================================================
   
 ==> Full System Demo Completed Successfully!
@@ -239,28 +239,28 @@ Enter keystore password:
 
 ##### sepolia
 ✅  [Success] Hash: 0x49998c44da18f8b0417e3a9e8bb51bb1e642e2f563749557a7ea50986ce15c53
-Contract Address: 0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C
+Contract Address: 0x5aE69a270f061d8435100938b2Cef210D1f8348F
 Block: 10174739
 Paid: 0.00091505960451984 ETH (797264 gas * 1.14774981 gwei)
 
 
 ##### sepolia
 ✅  [Success] Hash: 0x42dd44c1e6bf4ec33669b76f94d535c14c52811c431bb97472c78b8bd0d558a9
-Contract Address: 0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130
+Contract Address: 0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c
 Block: 10174740
 Paid: 0.002028869263576988 ETH (1885604 gas * 1.075978447 gwei)
 
 
 ##### sepolia
 ✅  [Success] Hash: 0x4c45f0f89d97fdeff513bf0be9d1b28941365206500752ec30ad362441b21fbc
-Contract Address: 0x2e329AE807c91f37bc4e49cB94A67328cFE34d35
+Contract Address: 0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3
 Block: 10174741
 Paid: 0.000998465011145006 ETH (964786 gas * 1.034908271 gwei)
 
 
 ##### sepolia
 ✅  [Success] Hash: 0x1510e10b4bdade0300a94c66b7bbcd6424ccf19c3f4076be9b5738393891fb6a
-Contract Address: 0x30333d882c50c1A28D56572088051f7932c201f2
+Contract Address: 0x8B86642180149a22c2e06647342f8E250BE5F23B
 Block: 10174742
 Paid: 0.001219291029944504 ETH (1214263 gas * 1.004140808 gwei)
 
@@ -492,17 +492,17 @@ Paid: 0.00011182501541922 ETH (104305 gas * 1.072096404 gwei)
 ONCHAIN EXECUTION COMPLETE & SUCCESSFUL.
 ##
 Start verification for (4) contracts
-Start verifying contract `0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C` deployed on sepolia
+Start verifying contract `0x5aE69a270f061d8435100938b2Cef210D1f8348F` deployed on sepolia
 EVM version: prague
 Compiler version: 0.8.30
 Optimizations:    200
 Constructor args: 00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000c4469676974616c204575726f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000044445555200000000000000000000000000000000000000000000000000000000
 
-Submitting verification for [src/DigitalEuro.sol:DigitalEuro] 0xCfE13DbeF03A25f6f2c6B436aA380f488367FC1C.
+Submitting verification for [src/DigitalEuro.sol:DigitalEuro] 0x5aE69a270f061d8435100938b2Cef210D1f8348F.
 Submitted contract for verification:
         Response: `OK`
         GUID: `atufxqfxz3v3wkaacyp59phytmyvtiwf6feareptfht2trlu6t`
-        URL: https://sepolia.etherscan.io/address/0xcfe13dbef03a25f6f2c6b436aa380f488367fc1c
+        URL: https://sepolia.etherscan.io/address/0x5aE69a270f061d8435100938b2Cef210D1f8348F
 Contract verification status:
 Response: `NOTOK`
 Details: `Pending in queue`
@@ -511,17 +511,17 @@ Contract verification status:
 Response: `OK`
 Details: `Pass - Verified`
 Contract successfully verified
-Start verifying contract `0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130` deployed on sepolia
+Start verifying contract `0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c` deployed on sepolia
 EVM version: prague
 Compiler version: 0.8.30
 Optimizations:    200
 Constructor args: 0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000008168747470733a2f2f616d6574687973742d61636365737369626c652d6c656d6d696e672d3635332e6d7970696e6174612e636c6f75642f697066732f6261667962656967757335716f69716379626466363771337a76366e37326e6d6d356d716f6d65696261726d7a79656a7567326a76776f6e6462692f7b69647d2e6a736f6e00000000000000000000000000000000000000000000000000000000000000
 
-Submitting verification for [src/FinancialAssets.sol:FinancialAssets] 0x2d5fC6b78ED4C0EEd0795C28fdbF9BF4004b7130.
+Submitting verification for [src/FinancialAssets.sol:FinancialAssets] 0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c.
 Submitted contract for verification:
         Response: `OK`
         GUID: `iimcbklwlkskvh7gwh71jzbmqtwgxu14p11dut5upusdbkccub`
-        URL: https://sepolia.etherscan.io/address/0x2d5fc6b78ed4c0eed0795c28fdbf9bf4004b7130
+        URL: https://sepolia.etherscan.io/address/0xbC7Ebadd93107D39A3379D9C600f428eb9765f0c
 Contract verification status:
 Response: `NOTOK`
 Details: `Pending in queue`
@@ -530,17 +530,17 @@ Contract verification status:
 Response: `OK`
 Details: `Pass - Verified`
 Contract successfully verified
-Start verifying contract `0x2e329AE807c91f37bc4e49cB94A67328cFE34d35` deployed on sepolia
+Start verifying contract `0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3` deployed on sepolia
 EVM version: prague
 Compiler version: 0.8.30
 Optimizations:    200
 Constructor args: 000000000000000000000000cfe13dbef03a25f6f2c6b436aa380f488367fc1c0000000000000000000000002d5fc6b78ed4c0eed0795c28fdbf9bf4004b7130
 
-Submitting verification for [src/PrimaryMarket.sol:PrimaryMarket] 0x2e329AE807c91f37bc4e49cB94A67328cFE34d35.
+Submitting verification for [src/PrimaryMarket.sol:PrimaryMarket] 0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3.
 Submitted contract for verification:
         Response: `OK`
         GUID: `phksprgaujujfitvj5idyndrykwhztu65ygzzjwzf6n8ncpp39`
-        URL: https://sepolia.etherscan.io/address/0x2e329ae807c91f37bc4e49cb94a67328cfe34d35
+        URL: https://sepolia.etherscan.io/address/0x7Bf3823D764bD3e2681A71Ff703837b508CAa8b3
 Contract verification status:
 Response: `NOTOK`
 Details: `Pending in queue`
@@ -549,17 +549,17 @@ Contract verification status:
 Response: `OK`
 Details: `Pass - Verified`
 Contract successfully verified
-Start verifying contract `0x30333d882c50c1A28D56572088051f7932c201f2` deployed on sepolia
+Start verifying contract `0x8B86642180149a22c2e06647342f8E250BE5F23B` deployed on sepolia
 EVM version: prague
 Compiler version: 0.8.30
 Optimizations:    200
 Constructor args: 000000000000000000000000cfe13dbef03a25f6f2c6b436aa380f488367fc1c0000000000000000000000002d5fc6b78ed4c0eed0795c28fdbf9bf4004b7130
 
-Submitting verification for [src/SecondaryMarket.sol:SecondaryMarket] 0x30333d882c50c1A28D56572088051f7932c201f2.
+Submitting verification for [src/SecondaryMarket.sol:SecondaryMarket] 0x8B86642180149a22c2e06647342f8E250BE5F23B.
 Submitted contract for verification:
         Response: `OK`
         GUID: `qrhfe14vueuybtqpfgsjvz9jxt1w3knzer3wnqkgw5rh6hvmiz`
-        URL: https://sepolia.etherscan.io/address/0x30333d882c50c1a28d56572088051f7932c201f2
+        URL: https://sepolia.etherscan.io/address/0x8B86642180149a22c2e06647342f8E250BE5F23B
 Contract verification status:
 Response: `NOTOK`
 Details: `Pending in queue`
